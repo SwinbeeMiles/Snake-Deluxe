@@ -56,6 +56,8 @@ public class Game : MonoBehaviour
     /// </summary>
     public GamePanel GamePanel;
 
+	public PauseMenu PauseMenu;
+
     /// <summary>
     /// Parameter specyfying delay between snake movements (in seconds).
     /// </summary>
@@ -115,6 +117,12 @@ public class Game : MonoBehaviour
     /// </summary>
     public bool Paused { get; private set; }
 
+	public void InterruptGame()
+	{
+		StopCoroutine(bonusCoroutine);
+		Paused = true;
+	}
+
     // Use this for initialization
     void Start()
     {
@@ -148,17 +156,39 @@ public class Game : MonoBehaviour
         }
     }
 
+	public void Pause()
+	{
+		Paused = true;
+		PauseMenu.gameObject.SetActive(true);
+		Time.timeScale = 0;
+	}
+
+	public void Unpause()
+	{
+		Paused = false;
+		PauseMenu.gameObject.SetActive(false);
+		controller.Resume();
+		Time.timeScale = 1;
+	}
+
     /// <summary>
     /// Updates game state.
     /// </summary>
     private void UpdateGameState()
     {
-        if (!Paused && snake != null)
+		if (!Paused && snake != null)
         {
             var dir = controller.NextDirection();
+			var lastdir = controller.PreviousDirection();
 
-            // New head position
-            var head = snake.NextHeadPosition(dir);
+			// New head position
+			var head = snake.NextHeadPosition(dir);
+
+			if (dir == Vector2.zero)
+			{
+				head = snake.NextHeadPosition(lastdir);
+				Pause();
+			}
 
             var x = head.x;
             var y = head.y;
@@ -236,6 +266,7 @@ public class Game : MonoBehaviour
         Menu.gameObject.SetActive(false);
         GamePanel.gameObject.SetActive(false);
         GameOver.gameObject.SetActive(false);
+		PauseMenu.gameObject.SetActive(false);
     }
 
     /// <summary>
@@ -263,6 +294,8 @@ public class Game : MonoBehaviour
 
         // Start bonus coroutine
         PlantABonus();
+
+		Time.timeScale = 1;
 
         // Start the game
         Paused = false;

@@ -40,7 +40,11 @@ public class Controller : MonoBehaviour
     void Update()
     {
         // Keyboard controls
-        if (Input.GetKeyDown("up") && LastDirection != Vector2.down)
+		if (Input.GetKeyDown(KeyCode.Escape))
+		{
+			Enqueue(Vector2.zero);
+		}
+        else if (Input.GetKeyDown("up") && LastDirection != Vector2.down)
         {
             Enqueue(Vector2.up);
         }
@@ -56,50 +60,6 @@ public class Controller : MonoBehaviour
         {
             Enqueue(Vector2.right);
         }
-
-        // Mouse (and touch) controls
-        if (Input.GetMouseButtonDown(0))
-        {
-            var position = Input.mousePosition;
-            if (position.x < Screen.width / 2)
-            {
-                if (LastDirection == Vector2.up)
-                {
-                    Enqueue(Vector2.left);
-                }
-                else if (LastDirection == Vector2.down)
-                {
-                    Enqueue(Vector2.right);
-                }
-                else if (LastDirection == Vector2.left)
-                {
-                    Enqueue(Vector2.down);
-                }
-                else if (LastDirection == Vector2.right)
-                {
-                    Enqueue(Vector2.up);
-                }
-            }
-            else
-            {
-                if (LastDirection == Vector2.up)
-                {
-                    Enqueue(Vector2.right);
-                }
-                else if (LastDirection == Vector2.down)
-                {
-                    Enqueue(Vector2.left);
-                }
-                else if (LastDirection == Vector2.left)
-                {
-                    Enqueue(Vector2.up);
-                }
-                else if (LastDirection == Vector2.right)
-                {
-                    Enqueue(Vector2.down);
-                }
-            }
-        }
     }
 
     /// <summary>
@@ -108,8 +68,15 @@ public class Controller : MonoBehaviour
     /// <param name="up"></param>
     private void Enqueue(IntVector2 direction)
     {
-        queue.AddLast(direction);
-        _lastDirection = direction;
+		if (direction == Vector2.zero)
+		{
+	        queue.AddLast(direction);
+		}
+		else
+		{
+			queue.AddLast(direction);
+	        _lastDirection = direction;
+		}
     }
 
     /// <summary>
@@ -126,6 +93,17 @@ public class Controller : MonoBehaviour
 
         return first;
     }
+
+	public IntVector2 PreviousDirection()
+    {
+        return _lastDirection;
+    }
+
+	public void Resume()
+	{
+		queue = new LinkedList<IntVector2>();
+		Enqueue(_lastDirection);
+	}
 
     /// <summary>
     /// Resets the controller.
