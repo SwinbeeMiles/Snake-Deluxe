@@ -34,8 +34,13 @@ public class Game : MonoBehaviour
     private IntVector2 bonusPosition;
 
     /// <summary>
+    /// Position of a wall.
+    /// </summary>
+    private IntVector2 wallPosition;
+    /// <summary>
     /// Specifies if bonus is visible and active.
     /// </summary>
+
     private bool bonusActive;
 
     /// <summary>
@@ -57,7 +62,6 @@ public class Game : MonoBehaviour
     public GamePanel GamePanel;
 
 	public PauseMenu PauseMenu;
-
     /// <summary>
     /// Parameter specyfying delay between snake movements (in seconds).
     /// </summary>
@@ -207,7 +211,7 @@ public class Game : MonoBehaviour
                     soundManager.PlayAppleSoundEffect();
                     snake.Move(dir, true);
                     Score += 1;
-                    PlantAnApple();
+                    PlantAnApple();    
                 }
                 else if (head == bonusPosition && bonusActive)
                 {
@@ -217,11 +221,17 @@ public class Game : MonoBehaviour
                     StopCoroutine(bonusCoroutine);
                     PlantABonus();
                 }
+
+                else if (Board[head].Content == TileContent.Wall)
+                {
+                    StartCoroutine(GameOverCoroutine());
+                }
                 else
                 {
                     snake.Move(dir, false);
                 }
             }
+
             else
             {
                 // Head is outside board's bounds - game over.
@@ -286,6 +296,9 @@ public class Game : MonoBehaviour
         // Clear board
         Board.Reset();
 
+        //Build a wall
+        BuildMultipleWall();
+
         // Resets snake
         snake.Reset();
 
@@ -330,6 +343,93 @@ public class Game : MonoBehaviour
         applePosition = emptyPositions.RandomElement();
         Board[applePosition].Content = TileContent.Apple;
     }
+
+    private void BuildAWall(int x, int y)
+    {
+        wallPosition.x = x;
+        wallPosition.y = y;
+        Board[wallPosition].Content = TileContent.Wall;
+    }
+
+    private void BuildMultipleWall()
+    {
+        for (int x = 0; x < 6; x++)
+        {
+            BuildAWall(x, 9);
+        }
+
+        for (int x = 3; x < 10; x++)
+        {
+            BuildAWall(x, 12);
+        }
+
+        for(int y = 3; y < 7; y++)
+        {
+            BuildAWall(13, y);
+        }
+
+        for (int y = 3; y < 11; y++)
+        {
+            BuildAWall(23, y);
+        }
+
+        for (int x = 16; x < 30; x++)
+        {
+            BuildAWall(x, 7);
+        }
+
+        for (int x = 3; x < 16; x++)
+        {
+            BuildAWall(x, 17);
+        }
+
+        for (int y = 6; y < 12; y++)
+        {
+            BuildAWall(4, y);
+        }
+
+        for (int x = 7; x < 16; x++)
+        {
+            BuildAWall(x, 4);
+        }
+
+        for (int y = 3; y < 11; y++)
+        {
+            BuildAWall(27, y);
+        }
+
+    }
+    /*private void BuildMultipleWall()
+    {
+        System.Random rng = new System.Random();
+        int wallTotal = rng.Next(15, 25);
+
+        for (int numWall = 0; numWall < wallTotal; numWall++)
+        {
+            int wallPosition = rng.Next(0, 2);
+            int xStart = rng.Next(7, 28);
+            int yStart = rng.Next(6, 17);
+ 
+            int xEnd = rng.Next(xStart, 28);
+            int yEnd = rng.Next(yStart, 18);
+
+            if(wallPosition == 1)
+            {
+                for(int x = xStart; x<xEnd;x++)
+                {
+                    BuildAWall(x, yStart);
+                }
+            }
+
+            else
+            {
+                for (int y = yStart; y < yEnd; y++)
+                {
+                    BuildAWall(xStart, y);
+                }
+            }
+        }
+    }*/
 
     /// <summary>
     /// Couroutine responsible for placing and removing bonus from the board.

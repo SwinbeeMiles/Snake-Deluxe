@@ -39,6 +39,10 @@ public class Tile : MonoBehaviour
     /// </summary>
     public Sprite SnakesLBulged;
     /// <summary>
+    /// Obstacles in map
+    /// </summary>
+    public Sprite Wall;
+    /// <summary>
     /// List of sprites representing bonus fruit (10 points fruit).
     /// </summary>
     public List<Sprite> Bonuses;
@@ -109,6 +113,9 @@ public class Tile : MonoBehaviour
                     break;
                 case TileContent.SnakesLBulged:
                     image.sprite = SnakesLBulged;
+                    break;     
+                case TileContent.Wall:
+                    image.sprite = Wall;
                     break;
             }
             lastUsedImage = image.sprite;
