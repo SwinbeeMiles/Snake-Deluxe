@@ -1547,7 +1547,7 @@ RectTransform:
   - {fileID: 1913142358}
   - {fileID: 957381878}
   m_Father: {fileID: 1607903384}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -1794,8 +1794,8 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 1718491738}
-  - {fileID: 1385787640}
   - {fileID: 1642462030}
+  - {fileID: 1385787640}
   - {fileID: 449009360}
   m_Father: {fileID: 0}
   m_RootOrder: 1
@@ -1821,7 +1821,7 @@ MonoBehaviour:
   GameOver: {fileID: 1642462032}
   GamePanel: {fileID: 1385787643}
   PauseMenu: {fileID: 449009361}
-  GameSpeed: 0.1
+  GameSpeed: 0.5
   Board: {fileID: 516905211}
 --- !u!114 &1607903386
 MonoBehaviour:
@@ -1850,6 +1850,9 @@ MonoBehaviour:
   AppleClip: {fileID: 8300000, guid: 40bb74a90f300b341a367894b0db91a8, type: 3}
   BonusClip: {fileID: 8300000, guid: a8b32e8a5141cf94881a57b38f498a5a, type: 3}
   GameOverClip: {fileID: 8300000, guid: df72812af81f7524187c5758b8d65ff4, type: 3}
+  LeftBeepClip: {fileID: 8300000, guid: eb25b1762d200084f8c52c989932a4ee, type: 3}
+  CenterBeepClip: {fileID: 8300000, guid: ab864ac4fac1ae943b1796b11018d30e, type: 3}
+  RightBeepClip: {fileID: 8300000, guid: 4d124c5ebb523c744ae38c1fa195efe1, type: 3}
 --- !u!114 &1607903388
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1896,7 +1899,7 @@ RectTransform:
   - {fileID: 1291108074}
   - {fileID: 1511321425}
   m_Father: {fileID: 1607903384}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}

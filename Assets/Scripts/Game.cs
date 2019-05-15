@@ -198,12 +198,12 @@ public class Game : MonoBehaviour
             var x = head.x;
             var y = head.y;
 
-            if (snake.WithoutTail.Contains(head))
-            {
-                // Snake has bitten its tail - game over
-                StartCoroutine(GameOverCoroutine());
-                return;
-            }
+            //if (snake.WithoutTail.Contains(head))
+            //{
+            //    // Snake has bitten its tail - game over
+            //    StartCoroutine(GameOverCoroutine());
+            //    return;
+            //}
 
             if (x >= 0 && x < Board.Columns && y >= 0 && y < Board.Rows)
             {
