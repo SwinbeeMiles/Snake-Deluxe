@@ -6,6 +6,8 @@ using Utils;
 
 public class Game : MonoBehaviour
 {
+	// Test comment by Zikri Dawek
+
     /// <summary>
     /// Variable used for game update delay calcuations.
     /// </summary>
