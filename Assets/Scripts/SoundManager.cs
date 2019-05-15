@@ -20,6 +20,12 @@ public class SoundManager : MonoBehaviour
     /// </summary>
     public AudioClip GameOverClip;
 
+	public AudioClip LeftBeepClip;
+
+	public AudioClip CenterBeepClip;
+
+	public AudioClip RightBeepClip;
+
     /// <summary>
     /// Audio source for an apple sound clip.
     /// </summary>
@@ -34,6 +40,12 @@ public class SoundManager : MonoBehaviour
     /// Audio source for a game over sound clip.
     /// </summary>
     private AudioSource gameOverAudioSource;
+
+	private AudioSource leftBeepSource;
+
+	private AudioSource centerBeepSource;
+
+	private AudioSource rightBeepSource;
 
     // Use this for initialization
     void Awake()
@@ -50,6 +62,18 @@ public class SoundManager : MonoBehaviour
         {
             gameOverAudioSource = gameObject.AddAudio(GameOverClip, false, false, 1f);
         }
+		if (LeftBeepClip != null)
+		{
+			leftBeepSource = gameObject.AddAudio(LeftBeepClip, false, false, 1f);
+		}
+		if (RightBeepClip != null)
+		{
+			rightBeepSource = gameObject.AddAudio(RightBeepClip, false, false, 1f);
+		}
+		if (CenterBeepClip != null)
+		{
+			centerBeepSource = gameObject.AddAudio(CenterBeepClip, false, false, 1f);
+		}
     }
 
     public void PlayAppleSoundEffect()
@@ -75,6 +99,30 @@ public class SoundManager : MonoBehaviour
             gameOverAudioSource.Play();
         }
     }
+
+	public void PlayLeftBeepSoundEffect()
+	{
+		if (leftBeepSource != null)
+		{
+			leftBeepSource.Play();
+		}
+	}
+
+	public void PlayRightBeepSoundEffect()
+	{
+		if (rightBeepSource != null)
+		{
+			rightBeepSource.Play();
+		}
+	}
+
+	public void PlayCenterBeepSoundEffect()
+	{
+		if (centerBeepSource != null)
+		{
+			centerBeepSource.Play();
+		}
+	}
 
     // Update is called once per frame
     void Update()

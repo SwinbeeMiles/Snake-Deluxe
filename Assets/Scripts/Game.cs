@@ -6,8 +6,7 @@ using Utils;
 
 public class Game : MonoBehaviour
 {
-	// Test comment by Zikri Dawek
-
+	private int counter = 0;
     /// <summary>
     /// Variable used for game update delay calcuations.
     /// </summary>
@@ -208,29 +207,82 @@ public class Game : MonoBehaviour
 
             if (x >= 0 && x < Board.Columns && y >= 0 && y < Board.Rows)
             {
-                if (head == applePosition)
-                {
-                    soundManager.PlayAppleSoundEffect();
-                    snake.Move(dir, true);
-                    Score += 1;
-                    PlantAnApple();    
-                }
-                else if (head == bonusPosition && bonusActive)
-                {
-                    soundManager.PlayBonusSoundEffect();
-                    snake.Move(dir, true);
-                    Score += 10;
-                    StopCoroutine(bonusCoroutine);
-                    PlantABonus();
-                }
+				if (head == applePosition)
+				{
+					soundManager.PlayAppleSoundEffect();
+					snake.Move(dir, true);
+					Score += 1;
+					PlantAnApple();
+				}
+				else if (head == bonusPosition && bonusActive)
+				{
+					soundManager.PlayBonusSoundEffect();
+					snake.Move(dir, true);
+					Score += 10;
+					StopCoroutine(bonusCoroutine);
+					PlantABonus();
+				}
 
-                else if (Board[head].Content == TileContent.Wall)
-                {
-                    StartCoroutine(GameOverCoroutine());
-                }
-                else
-                {
-                    snake.Move(dir, false);
+				else if (Board[head].Content == TileContent.Wall)
+				{
+					StartCoroutine(GameOverCoroutine());
+				}
+				else
+				{
+					snake.Move(dir, false);
+					counter++;
+					if (counter == 1) //Frequency of beeps
+					{
+						if (((applePosition.y <= snake.Head.y && applePosition.x > snake.Head.x) || (applePosition.y >= snake.Head.y && applePosition.x > snake.Head.x)) && (lastdir == Vector2.up))
+						{
+							soundManager.PlayRightBeepSoundEffect();
+						}
+						else if (((applePosition.y <= snake.Head.y && applePosition.x < snake.Head.x) || (applePosition.y >= snake.Head.y && applePosition.x < snake.Head.x)) && (lastdir == Vector2.up))
+						{
+							soundManager.PlayLeftBeepSoundEffect();
+						}
+						else if ((applePosition.y <= snake.Head.y && applePosition.x == snake.Head.x) && (lastdir == Vector2.up))
+						{
+							soundManager.PlayCenterBeepSoundEffect();
+						}
+						else if (((applePosition.y > snake.Head.y && applePosition.x <= snake.Head.x) || (applePosition.y > snake.Head.y && applePosition.x >= snake.Head.x)) && (lastdir == Vector2.right))
+						{
+							soundManager.PlayRightBeepSoundEffect();
+						}
+						else if (((applePosition.y < snake.Head.y && applePosition.x <= snake.Head.x) || (applePosition.y < snake.Head.y && applePosition.x >= snake.Head.x)) && (lastdir == Vector2.right))
+						{
+							soundManager.PlayLeftBeepSoundEffect();
+						}
+						else if ((applePosition.y == snake.Head.y && applePosition.x >= snake.Head.x) && (lastdir == Vector2.right))
+						{
+							soundManager.PlayCenterBeepSoundEffect();
+						}
+						else if (((applePosition.y < snake.Head.y && applePosition.x >= snake.Head.x) || (applePosition.y < snake.Head.y && applePosition.x <= snake.Head.x)) && (lastdir == Vector2.left))
+						{
+							soundManager.PlayRightBeepSoundEffect();
+						}
+						else if (((applePosition.y > snake.Head.y && applePosition.x >= snake.Head.x) || (applePosition.y > snake.Head.y && applePosition.x <= snake.Head.x)) && (lastdir == Vector2.left))
+						{
+							soundManager.PlayLeftBeepSoundEffect();
+						}
+						else if ((applePosition.y == snake.Head.y && applePosition.x <= snake.Head.x) && (lastdir == Vector2.left))
+						{
+							soundManager.PlayCenterBeepSoundEffect();
+						}
+						else if (((applePosition.y >= snake.Head.y && applePosition.x > snake.Head.x) || (applePosition.y <= snake.Head.y && applePosition.x > snake.Head.x)) && (lastdir == Vector2.down))
+						{
+							soundManager.PlayRightBeepSoundEffect();
+						}
+						else if (((applePosition.y >= snake.Head.y && applePosition.x < snake.Head.x) || (applePosition.y <= snake.Head.y && applePosition.x < snake.Head.x)) && (lastdir == Vector2.down))
+						{
+							soundManager.PlayLeftBeepSoundEffect();
+						}
+						else if ((applePosition.y >= snake.Head.y && applePosition.x == snake.Head.x) && (lastdir == Vector2.down))
+						{
+							soundManager.PlayCenterBeepSoundEffect();
+						}
+						counter = 0;
+					}
                 }
             }
 
@@ -286,6 +338,7 @@ public class Game : MonoBehaviour
     /// </summary>
     private void Restart()
     {
+		counter = 0;
         // Resets the controller.
         controller.Reset();
 
@@ -299,7 +352,7 @@ public class Game : MonoBehaviour
         Board.Reset();
 
         //Build a wall
-        BuildMultipleWall();
+        //BuildMultipleWall();
 
         // Resets snake
         snake.Reset();
