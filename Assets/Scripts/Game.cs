@@ -356,49 +356,38 @@ public class Game : MonoBehaviour
 	//Build multiple wall by calling the BuildAWall function inside this function and pass in x-axis and y-axis value.
     private void BuildMultipleWall()
     {
-        for (int x = 0; x < 6; x++)
+        for (int x = 6; x < 11; x++)
         {
-            BuildAWall(x, 9);
+            BuildAWall(x, 4);
+            BuildAWall(x, 16);
         }
 
-        for (int x = 3; x < 10; x++)
+        for (int x = 19; x < 24; x++)
         {
-            BuildAWall(x, 12);
+            BuildAWall(x, 4);
+            BuildAWall(x, 16);
         }
 
-        for(int y = 3; y < 7; y++)
+        for (int y = 5; y<9; y++)
         {
-            BuildAWall(13, y);
-        }
-
-        for (int y = 3; y < 11; y++)
-        {
+            BuildAWall(6, y);
             BuildAWall(23, y);
         }
 
-        for (int x = 16; x < 30; x++)
+        for(int y = 12; y<16; y++)
         {
-            BuildAWall(x, 7);
+            BuildAWall(6, y);
+            BuildAWall(23, y);
         }
 
-        for (int x = 3; x < 16; x++)
+        for (int y = 7; y < 14; y++)
         {
-            BuildAWall(x, 17);
+            BuildAWall(15, y);
         }
 
-        for (int y = 6; y < 12; y++)
+        for (int x = 12; x < 19; x++)
         {
-            BuildAWall(4, y);
-        }
-
-        for (int x = 7; x < 16; x++)
-        {
-            BuildAWall(x, 4);
-        }
-
-        for (int y = 3; y < 11; y++)
-        {
-            BuildAWall(27, y);
+            BuildAWall(x, 10);
         }
 
     }
