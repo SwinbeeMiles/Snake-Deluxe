@@ -351,6 +351,7 @@ public class Game : MonoBehaviour
         Board[wallPosition].Content = TileContent.Wall;
     }
 
+	//Build multiple wall by calling the BuildAWall function inside this function and pass in x-axis and y-axis value.
     private void BuildMultipleWall()
     {
         for (int x = 0; x < 6; x++)
