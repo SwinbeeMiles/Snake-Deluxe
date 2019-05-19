@@ -11,10 +11,10 @@ public class GamePanel : MonoBehaviour {
     /// <summary>
     /// Text showing high score.
     /// </summary>
-    private Text textHighScore;
+    //private Text textHighScore;
 
     private int _score;
-    private int _highScore;
+    //private int _highScore;
 
     /// <summary>
     /// Gets or sets currently displayed score.
@@ -35,7 +35,7 @@ public class GamePanel : MonoBehaviour {
     /// <summary>
     /// Gets or sets currently displayed high score.
     /// </summary>
-    public int HighScore
+    /*public int HighScore
     {
         get
         {
@@ -46,12 +46,12 @@ public class GamePanel : MonoBehaviour {
             _highScore = value;
             textHighScore.text = value.ToString();
         }
-    }
+    }*/
 
     // Use this for initialization
     void Awake () {
         textScore = transform.Find("Score").GetComponent<Text>();
-        textHighScore = transform.Find("High Score").GetComponent<Text>();
+        //textHighScore = transform.Find("High Score").GetComponent<Text>();
     }
 	
 	// Update is called once per frame

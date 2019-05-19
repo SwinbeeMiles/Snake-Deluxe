@@ -112,7 +112,7 @@ public class Game : MonoBehaviour
         {
             _highScore = value;
             PlayerPrefs.SetInt("High Score", value);
-            GamePanel.HighScore = value;
+            //GamePanel.HighScore = value;
             Menu.HighScore = value;
         }
     }
