@@ -176,6 +176,11 @@ public class Game : MonoBehaviour
 		Time.timeScale = 1;
 	}
 
+	public void QuitGame()
+	{
+		Application.Quit();
+	}
+
     /// <summary>
     /// Updates game state.
     /// </summary>
