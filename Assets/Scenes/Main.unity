@@ -2277,7 +2277,7 @@ MonoBehaviour:
   GamePanel: {fileID: 1385787643}
   NextLevelMenu: {fileID: 1611586392}
   PauseMenu: {fileID: 449009361}
-  GameSpeed: 0.5
+  GameSpeed: 0.1
   Board: {fileID: 516905211}
   level: 0
 --- !u!114 &1607903386
