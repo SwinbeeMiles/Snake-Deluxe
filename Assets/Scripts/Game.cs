@@ -299,7 +299,7 @@ public class Game : MonoBehaviour
         Board.Reset();
 
         //Build a wall
-        BuildMultipleWall();
+        BuildMultipleWallThree();
 
         // Resets snake
         snake.Reset();
@@ -354,7 +354,7 @@ public class Game : MonoBehaviour
     }
 
 	//Build multiple wall by calling the BuildAWall function inside this function and pass in x-axis and y-axis value.
-    private void BuildMultipleWall()
+    private void BuildMultipleWallOne()
     {
         for (int x = 6; x < 11; x++)
         {
@@ -389,39 +389,77 @@ public class Game : MonoBehaviour
         {
             BuildAWall(x, 10);
         }
-
     }
-    /*private void BuildMultipleWall()
+
+    private void BuildMultipleWallTwo()
     {
-        System.Random rng = new System.Random();
-        int wallTotal = rng.Next(15, 25);
-
-        for (int numWall = 0; numWall < wallTotal; numWall++)
+        for (int y=4 ; y<9; y++)
         {
-            int wallPosition = rng.Next(0, 2);
-            int xStart = rng.Next(7, 28);
-            int yStart = rng.Next(6, 17);
- 
-            int xEnd = rng.Next(xStart, 28);
-            int yEnd = rng.Next(yStart, 18);
-
-            if(wallPosition == 1)
-            {
-                for(int x = xStart; x<xEnd;x++)
-                {
-                    BuildAWall(x, yStart);
-                }
-            }
-
-            else
-            {
-                for (int y = yStart; y < yEnd; y++)
-                {
-                    BuildAWall(xStart, y);
-                }
-            }
+            BuildAWall(12, y);
+            BuildAWall(18, y);
         }
-    }*/
+
+        for (int y = 12; y<17; y++)
+        {
+            BuildAWall(12, y);
+            BuildAWall(18, y);
+        }
+
+        for(int x = 7; x<12; x++)
+        {
+            BuildAWall(x, 8);
+            BuildAWall(x, 12);
+        }
+
+        for (int x = 19; x < 24; x++)
+        {
+            BuildAWall(x, 8);
+            BuildAWall(x, 12);
+        }
+
+        BuildAWall(15, 10);
+    }
+
+    private void BuildMultipleWallThree()
+    {
+        for(int y=0; y<5; y++)
+        {
+            BuildAWall(12, y);
+            BuildAWall(18, y);
+        }
+
+        for (int y = 15; y < 20; y++)
+        {
+            BuildAWall(12, y);
+            BuildAWall(18, y);
+        }
+
+        for (int x = 0; x<4; x++)
+        {
+            BuildAWall(x, 5);
+            BuildAWall(x, 15);
+        }
+
+        for (int x = 26; x < 30; x++)
+        {
+            BuildAWall(x, 5);
+            BuildAWall(x, 15);
+        }
+
+        for (int x=14; x<17; x++)
+        {
+            BuildAWall(x, 8);
+            BuildAWall(x, 12);
+        }
+
+        for (int y=8; y<13; y++)
+        {
+            BuildAWall(10, y);
+            BuildAWall(20, y);
+            BuildAWall(2, y);
+            BuildAWall(28, y);
+        }
+    }
 
     /// <summary>
     /// Couroutine responsible for placing and removing bonus from the board.
