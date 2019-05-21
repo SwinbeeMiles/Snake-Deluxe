@@ -6,7 +6,7 @@ using Utils;
 
 public class Game : MonoBehaviour
 {
-	// Test comment by Zikri Dawek
+    // Test comment by Zikri Dawek
 
     /// <summary>
     /// Variable used for game update delay calcuations.
@@ -45,6 +45,7 @@ public class Game : MonoBehaviour
 
     private bool bonusActive;
 
+    private int tempScore = 0;
     /// <summary>
     /// Game controller.
     /// </summary>
@@ -63,7 +64,10 @@ public class Game : MonoBehaviour
     /// </summary>
     public GamePanel GamePanel;
 
-	public PauseMenu PauseMenu;
+    public NextLevelMenu NextLevelMenu;
+
+    public int level = 0;
+    public PauseMenu PauseMenu;
     /// <summary>
     /// Parameter specyfying delay between snake movements (in seconds).
     /// </summary>
@@ -123,11 +127,11 @@ public class Game : MonoBehaviour
     /// </summary>
     public bool Paused { get; private set; }
 
-	public void InterruptGame()
-	{
-		StopCoroutine(bonusCoroutine);
-		Paused = true;
-	}
+    public void InterruptGame()
+    {
+        StopCoroutine(bonusCoroutine);
+        Paused = true;
+    }
 
     // Use this for initialization
     void Start()
@@ -159,42 +163,62 @@ public class Game : MonoBehaviour
         {
             time -= GameSpeed;
             UpdateGameState();
+            if (Score >= 2 && level == 0)
+            {
+                tempScore = Score;
+                Time.timeScale = 0;
+                StopCoroutine(bonusCoroutine);
+                NextLevelMenu.gameObject.SetActive(true);
+            }
+
+            else if (Score >= 3 && level == 1)
+            {
+                tempScore = Score;
+                Time.timeScale = 0;
+                StopCoroutine(bonusCoroutine);
+                NextLevelMenu.gameObject.SetActive(true);
+            }
+
+            else if (Score >= 5 && level == 2)
+            {
+                Pause();
+            }
         }
     }
 
-	public void Pause()
-	{
-		Paused = true;
-		PauseMenu.gameObject.SetActive(true);
-		Time.timeScale = 0;
-	}
+    public void Pause()
+    {
+        Paused = true;
+        PauseMenu.gameObject.SetActive(true);
+        Time.timeScale = 0;
+    }
 
-	public void Unpause()
-	{
-		Paused = false;
-		PauseMenu.gameObject.SetActive(false);
-		controller.Resume();
-		Time.timeScale = 1;
-	}
+    public void Unpause()
+    {
+        Paused = false;
+        PauseMenu.gameObject.SetActive(false);
+        controller.Resume();
+        Time.timeScale = 1;
+    }
 
     /// <summary>
     /// Updates game state.
     /// </summary>
     private void UpdateGameState()
     {
-		if (!Paused && snake != null)
+        if (!Paused && snake != null)
         {
             var dir = controller.NextDirection();
-			var lastdir = controller.PreviousDirection();
+            var lastdir = controller.PreviousDirection();
 
-			// New head position
-			var head = snake.NextHeadPosition(dir);
+            // New head position
+            var head = snake.NextHeadPosition(dir);
 
-			if (dir == Vector2.zero)
-			{
-				head = snake.NextHeadPosition(lastdir);
-				Pause();
-			}
+            if (dir == Vector2.zero)
+            {
+                head = snake.NextHeadPosition(lastdir);
+                Pause();
+            }
 
             var x = head.x;
             var y = head.y;
@@ -213,7 +237,7 @@ public class Game : MonoBehaviour
                     soundManager.PlayAppleSoundEffect();
                     snake.Move(dir, true);
                     Score += 1;
-                    PlantAnApple();    
+                    PlantAnApple();
                 }
                 else if (head == bonusPosition && bonusActive)
                 {
@@ -267,6 +291,7 @@ public class Game : MonoBehaviour
     {
         HideAllPanels();
         Restart();
+        BuildMultipleWallOne();
         GamePanel.gameObject.SetActive(true);
     }
 
@@ -278,7 +303,8 @@ public class Game : MonoBehaviour
         Menu.gameObject.SetActive(false);
         GamePanel.gameObject.SetActive(false);
         GameOver.gameObject.SetActive(false);
-		PauseMenu.gameObject.SetActive(false);
+        PauseMenu.gameObject.SetActive(false);
+        NextLevelMenu.gameObject.SetActive(false);
     }
 
     /// <summary>
@@ -298,9 +324,6 @@ public class Game : MonoBehaviour
         // Clear board
         Board.Reset();
 
-        //Build a wall
-        BuildMultipleWallThree();
-
         // Resets snake
         snake.Reset();
 
@@ -310,7 +333,7 @@ public class Game : MonoBehaviour
         // Start bonus coroutine
         PlantABonus();
 
-		Time.timeScale = 1;
+        Time.timeScale = 1;
 
         // Start the game
         Paused = false;
@@ -344,121 +367,6 @@ public class Game : MonoBehaviour
         }
         applePosition = emptyPositions.RandomElement();
         Board[applePosition].Content = TileContent.Apple;
-    }
-
-    private void BuildAWall(int x, int y)
-    {
-        wallPosition.x = x;
-        wallPosition.y = y;
-        Board[wallPosition].Content = TileContent.Wall;
-    }
-
-	//Build multiple wall by calling the BuildAWall function inside this function and pass in x-axis and y-axis value.
-    private void BuildMultipleWallOne()
-    {
-        for (int x = 6; x < 11; x++)
-        {
-            BuildAWall(x, 4);
-            BuildAWall(x, 16);
-        }
-
-        for (int x = 19; x < 24; x++)
-        {
-            BuildAWall(x, 4);
-            BuildAWall(x, 16);
-        }
-
-        for (int y = 5; y<9; y++)
-        {
-            BuildAWall(6, y);
-            BuildAWall(23, y);
-        }
-
-        for(int y = 12; y<16; y++)
-        {
-            BuildAWall(6, y);
-            BuildAWall(23, y);
-        }
-
-        for (int y = 7; y < 14; y++)
-        {
-            BuildAWall(15, y);
-        }
-
-        for (int x = 12; x < 19; x++)
-        {
-            BuildAWall(x, 10);
-        }
-    }
-
-    private void BuildMultipleWallTwo()
-    {
-        for (int y=4 ; y<9; y++)
-        {
-            BuildAWall(12, y);
-            BuildAWall(18, y);
-        }
-
-        for (int y = 12; y<17; y++)
-        {
-            BuildAWall(12, y);
-            BuildAWall(18, y);
-        }
-
-        for(int x = 7; x<12; x++)
-        {
-            BuildAWall(x, 8);
-            BuildAWall(x, 12);
-        }
-
-        for (int x = 19; x < 24; x++)
-        {
-            BuildAWall(x, 8);
-            BuildAWall(x, 12);
-        }
-
-        BuildAWall(15, 10);
-    }
-
-    private void BuildMultipleWallThree()
-    {
-        for(int y=0; y<5; y++)
-        {
-            BuildAWall(12, y);
-            BuildAWall(18, y);
-        }
-
-        for (int y = 15; y < 20; y++)
-        {
-            BuildAWall(12, y);
-            BuildAWall(18, y);
-        }
-
-        for (int x = 0; x<4; x++)
-        {
-            BuildAWall(x, 5);
-            BuildAWall(x, 15);
-        }
-
-        for (int x = 26; x < 30; x++)
-        {
-            BuildAWall(x, 5);
-            BuildAWall(x, 15);
-        }
-
-        for (int x=14; x<17; x++)
-        {
-            BuildAWall(x, 8);
-            BuildAWall(x, 12);
-        }
-
-        for (int y=8; y<13; y++)
-        {
-            BuildAWall(10, y);
-            BuildAWall(20, y);
-            BuildAWall(2, y);
-            BuildAWall(28, y);
-        }
     }
 
     /// <summary>
@@ -527,5 +435,175 @@ public class Game : MonoBehaviour
 
         // Show "game over" panel
         ShowGameOver();
+        level = 0;
+    }
+
+    private void BuildAWall(int x, int y)
+    {
+        wallPosition.x = x;
+        wallPosition.y = y;
+        Board[wallPosition].Content = TileContent.Wall;
+    }
+
+    //Build multiple wall by calling the BuildAWall function inside this function and pass in x-axis and y-axis value.
+    private void BuildMultipleWallOne()
+    {
+        for (int x = 6; x < 11; x++)
+        {
+            BuildAWall(x, 4);
+            BuildAWall(x, 16);
+        }
+
+        for (int x = 19; x < 24; x++)
+        {
+            BuildAWall(x, 4);
+            BuildAWall(x, 16);
+        }
+
+        for (int y = 5; y < 9; y++)
+        {
+            BuildAWall(6, y);
+            BuildAWall(23, y);
+        }
+
+        for (int y = 12; y < 16; y++)
+        {
+            BuildAWall(6, y);
+            BuildAWall(23, y);
+        }
+
+        for (int y = 7; y < 14; y++)
+        {
+            BuildAWall(15, y);
+        }
+
+        for (int x = 12; x < 19; x++)
+        {
+            BuildAWall(x, 10);
+        }
+    }
+
+    private void BuildMultipleWallTwo()
+    {
+        for (int y = 4; y < 9; y++)
+        {
+            BuildAWall(12, y);
+            BuildAWall(18, y);
+        }
+
+        for (int y = 12; y < 17; y++)
+        {
+            BuildAWall(12, y);
+            BuildAWall(18, y);
+        }
+
+        for (int x = 7; x < 12; x++)
+        {
+            BuildAWall(x, 8);
+            BuildAWall(x, 12);
+        }
+
+        for (int x = 19; x < 24; x++)
+        {
+            BuildAWall(x, 8);
+            BuildAWall(x, 12);
+        }
+
+        BuildAWall(15, 10);
+    }
+
+    private void BuildMultipleWallThree()
+    {
+        for (int y = 0; y < 5; y++)
+        {
+            BuildAWall(12, y);
+            BuildAWall(18, y);
+        }
+
+        for (int y = 15; y < 20; y++)
+        {
+            BuildAWall(12, y);
+            BuildAWall(18, y);
+        }
+
+        for (int x = 0; x < 4; x++)
+        {
+            BuildAWall(x, 5);
+            BuildAWall(x, 15);
+        }
+
+        for (int x = 26; x < 30; x++)
+        {
+            BuildAWall(x, 5);
+            BuildAWall(x, 15);
+        }
+
+        for (int x = 14; x < 17; x++)
+        {
+            BuildAWall(x, 8);
+            BuildAWall(x, 12);
+        }
+
+        for (int y = 8; y < 13; y++)
+        {
+            BuildAWall(10, y);
+            BuildAWall(20, y);
+            BuildAWall(2, y);
+            BuildAWall(28, y);
+        }
+    }
+
+    private void LoadNextLevel()
+    {
+        
+        // Resets the controller.
+        controller.Reset();
+
+        // Set score
+        Score = 0;
+
+        // Disable bonus
+        bonusActive = false;
+
+        // Clear board
+        Board.Reset();
+
+        // Resets snake
+        snake.Reset();
+
+        //Second level
+        if (tempScore >= 2 && level == 0)
+        {
+            level = 1;
+            tempScore = 0;
+            BuildMultipleWallTwo();
+        }
+
+        //Last level
+        else if (tempScore >= 3 && level == 1)
+        {
+            level = 2;
+            tempScore = 0;
+            BuildMultipleWallThree();
+        }
+
+        // Plant an apple
+        PlantAnApple();
+
+        // Start bonus coroutine
+        PlantABonus();
+
+        Time.timeScale = 1;
+
+        // Start the game
+        Paused = false;
+        time = 0;
+    }
+
+    public void StartNextLevel()
+    {
+        HideAllPanels();
+        LoadNextLevel();
+        GamePanel.gameObject.SetActive(true);
     }
 }
