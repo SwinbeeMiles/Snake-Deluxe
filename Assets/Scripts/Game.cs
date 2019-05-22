@@ -184,7 +184,7 @@ public class Game : MonoBehaviour
                 StopCoroutine(bonusCoroutine);
                 tempScore = 0;
                 level = 0;
-				NextLevelMenu.gameObject.SetActive(false);
+                HideAllPanels();
                 EndGameMenu.gameObject.SetActive(true);
             }
         }
@@ -422,7 +422,6 @@ public class Game : MonoBehaviour
     /// </summary>
     private void PlantAnApple()
     {
-		var x = 0;
         if (Board[applePosition].Content == TileContent.Apple)
         {
             Board[applePosition].Content = TileContent.Empty;
@@ -434,19 +433,6 @@ public class Game : MonoBehaviour
             return;
         }
         applePosition = emptyPositions.RandomElement();
-
-		while (x<1)
-		{
-			if(Board[applePosition].Content == TileContent.Wall)
-			{
-				applePosition = emptyPositions.RandomElement();
-			}
-
-			else if(Board[applePosition].Content != TileContent.Wall)
-			{
-				break;
-			}
-		}
         Board[applePosition].Content = TileContent.Apple;
     }
 
