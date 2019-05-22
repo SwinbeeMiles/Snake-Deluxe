@@ -26,6 +26,12 @@ public class SoundManager : MonoBehaviour
 
 	public AudioClip RightBeepClip;
 
+	public AudioClip MainMenuClip;
+
+	public AudioClip PauseClip;
+
+	public AudioClip GameOverSpeechClip;
+
     /// <summary>
     /// Audio source for an apple sound clip.
     /// </summary>
@@ -46,6 +52,12 @@ public class SoundManager : MonoBehaviour
 	private AudioSource centerBeepSource;
 
 	private AudioSource rightBeepSource;
+
+	private AudioSource MainMenuSource;
+
+	private AudioSource PauseSource;
+
+	private AudioSource GameOverSpeechSource;
 
     // Use this for initialization
     void Awake()
@@ -73,6 +85,18 @@ public class SoundManager : MonoBehaviour
 		if (CenterBeepClip != null)
 		{
 			centerBeepSource = gameObject.AddAudio(CenterBeepClip, false, false, 1f);
+		}
+		if (MainMenuClip != null)
+		{
+			MainMenuSource = gameObject.AddAudio(MainMenuClip, false, false, 1f);
+		}
+		if (PauseClip != null)
+		{
+			PauseSource = gameObject.AddAudio(PauseClip, false, false, 1f);
+		}
+		if (GameOverSpeechClip != null)
+		{
+			GameOverSpeechSource = gameObject.AddAudio(GameOverSpeechClip, false, false, 1f);
 		}
     }
 
@@ -121,6 +145,54 @@ public class SoundManager : MonoBehaviour
 		if (centerBeepSource != null)
 		{
 			centerBeepSource.Play();
+		}
+	}
+
+	public void PlayMainMenu()
+	{
+		if (MainMenuSource != null)
+		{
+			MainMenuSource.Play();
+		}
+	}
+
+	public void StopMainMenu()
+	{
+		if (MainMenuSource != null)
+		{
+			MainMenuSource.Stop();
+		}
+	}
+
+	public void PlayPause()
+	{
+		if (PauseSource != null)
+		{
+			PauseSource.Play();
+		}
+	}
+
+	public void StopPause()
+	{
+		if (PauseSource != null)
+		{
+			PauseSource.Stop();
+		}
+	}
+
+	public void PlayGameOver()
+	{
+		if (GameOverSpeechSource != null)
+		{
+			GameOverSpeechSource.Play();
+		}
+	}
+
+	public void StopGameOver()
+	{
+		if (GameOverSpeechSource != null)
+		{
+			GameOverSpeechSource.Stop();
 		}
 	}
 

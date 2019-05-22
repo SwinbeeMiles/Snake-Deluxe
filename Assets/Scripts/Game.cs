@@ -118,7 +118,6 @@ public class Game : MonoBehaviour
             _highScore = value;
             PlayerPrefs.SetInt("High Score", value);
             //GamePanel.HighScore = value;
-            Menu.HighScore = value;
         }
     }
 
@@ -139,6 +138,9 @@ public class Game : MonoBehaviour
         // Display current high score.
         HighScore = PlayerPrefs.GetInt("High Score", 0);
 
+		// Find sound manager
+        soundManager = GetComponent<SoundManager>();
+
         // Show main menu
         ShowMenu();
 
@@ -149,10 +151,7 @@ public class Game : MonoBehaviour
         snake = new Snake(Board);
 
         // Pause the game
-        Paused = true;
-
-        // Find sound manager
-        soundManager = GetComponent<SoundManager>();
+		Paused = true;
     }
 
     // Update is called once per frame
@@ -184,7 +183,7 @@ public class Game : MonoBehaviour
                 StopCoroutine(bonusCoroutine);
                 tempScore = 0;
                 level = 0;
-                HideAllPanels();
+                NextLevelMenu.gameObject.SetActive(false);
                 EndGameMenu.gameObject.SetActive(true);
             }
         }
@@ -195,10 +194,12 @@ public class Game : MonoBehaviour
 		Paused = true;
 		PauseMenu.gameObject.SetActive(true);
 		Time.timeScale = 0;
+		soundManager.PlayPause();
 	}
 
 	public void Unpause()
 	{
+		soundManager.StopPause();
 		Paused = false;
 		PauseMenu.gameObject.SetActive(false);
 		controller.Resume();
@@ -335,8 +336,11 @@ public class Game : MonoBehaviour
     /// </summary>
     public void ShowMenu()
     {
+		soundManager.StopGameOver();
+		soundManager.StopPause();
         HideAllPanels();
         Menu.gameObject.SetActive(true);
+		soundManager.PlayMainMenu();
     }
 
     /// <summary>
@@ -344,8 +348,11 @@ public class Game : MonoBehaviour
     /// </summary>
     public void ShowGameOver()
     {
+		soundManager.StopMainMenu();
+		soundManager.StopPause();
         HideAllPanels();
         GameOver.gameObject.SetActive(true);
+		soundManager.PlayGameOver();
     }
 
     /// <summary>
@@ -365,6 +372,9 @@ public class Game : MonoBehaviour
     /// </summary>
     private void HideAllPanels()
     {
+		soundManager.StopGameOver();
+		soundManager.StopPause();
+		soundManager.StopMainMenu();
         Menu.gameObject.SetActive(false);
         GamePanel.gameObject.SetActive(false);
         GameOver.gameObject.SetActive(false);
@@ -422,6 +432,7 @@ public class Game : MonoBehaviour
     /// </summary>
     private void PlantAnApple()
     {
+	var x = 0;
         if (Board[applePosition].Content == TileContent.Apple)
         {
             Board[applePosition].Content = TileContent.Empty;
@@ -433,6 +444,20 @@ public class Game : MonoBehaviour
             return;
         }
         applePosition = emptyPositions.RandomElement();
+
+		while (x<1)
+		{
+			if(Board[applePosition].Content == TileContent.Wall)
+			{
+				applePosition = emptyPositions.RandomElement();
+			}
+
+			else if(Board[applePosition].Content != TileContent.Wall)
+			{
+				break;
+			}
+		}
+
         Board[applePosition].Content = TileContent.Apple;
     }
 
