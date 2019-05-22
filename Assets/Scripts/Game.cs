@@ -64,6 +64,7 @@ public class Game : MonoBehaviour
 
     public NextLevelMenu NextLevelMenu;
 
+    public EndGameMenu EndGameMenu;
     public PauseMenu PauseMenu;
     /// <summary>
     /// Parameter specyfying delay between snake movements (in seconds).
@@ -80,7 +81,7 @@ public class Game : MonoBehaviour
     private int _highScore;
     private int tempScore = 0;
     public int level = 0;
-
+    public bool dead = false;
     /// <summary>
     /// Current score.
     /// </summary>
@@ -162,7 +163,7 @@ public class Game : MonoBehaviour
         {
             time -= GameSpeed;
             UpdateGameState();
-            if (Score >= 2 && level == 0)
+            if (Score >= 2 && level == 0 && dead == false)
             {
                 tempScore = Score;
                 Time.timeScale = 0;
@@ -170,7 +171,7 @@ public class Game : MonoBehaviour
                 NextLevelMenu.gameObject.SetActive(true);
             }
 
-            else if (Score >= 3 && level == 1)
+            else if (Score >= 3 && level == 1 && dead == false)
             {
                 tempScore = Score;
                 Time.timeScale = 0;
@@ -178,12 +179,13 @@ public class Game : MonoBehaviour
                 NextLevelMenu.gameObject.SetActive(true);
             }
 
-            else if (Score >= 5 && level == 2)
+            else if (Score >= 5 && level == 2 && dead == false)
             {
                 StopCoroutine(bonusCoroutine);
                 tempScore = 0;
                 level = 0;
-                Pause();
+                HideAllPanels();
+                EndGameMenu.gameObject.SetActive(true);
             }
         }
     }
@@ -233,6 +235,7 @@ public class Game : MonoBehaviour
             if (snake.WithoutTail.Contains(head))
             {
                 // Snake has bitten its tail - game over
+                dead = true;
                 StartCoroutine(GameOverCoroutine());
                 return;
             }
@@ -321,6 +324,7 @@ public class Game : MonoBehaviour
             else
             {
                 // Head is outside board's bounds - game over.
+                dead = true;
                 StartCoroutine(GameOverCoroutine());
             }
         }
@@ -351,6 +355,7 @@ public class Game : MonoBehaviour
     {
         HideAllPanels();
         Restart();
+        dead = false;
         BuildMultipleWallOne();
         GamePanel.gameObject.SetActive(true);
     }
@@ -365,6 +370,7 @@ public class Game : MonoBehaviour
         GameOver.gameObject.SetActive(false);
 		PauseMenu.gameObject.SetActive(false);
         NextLevelMenu.gameObject.SetActive(false);
+        EndGameMenu.gameObject.SetActive(false);
     }
 
     /// <summary>
@@ -497,6 +503,7 @@ public class Game : MonoBehaviour
         // Show "game over" panel
         ShowGameOver();
         level = 0;
+        dead = true;
     }
 
     private void BuildAWall(int x, int y)
