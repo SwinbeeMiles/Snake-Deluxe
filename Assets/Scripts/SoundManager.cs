@@ -32,6 +32,12 @@ public class SoundManager : MonoBehaviour
 
 	public AudioClip GameOverSpeechClip;
 
+	public AudioClip LeftTickClip;
+
+	public AudioClip RightTickClip;
+
+	public AudioClip AlertClip;
+
     /// <summary>
     /// Audio source for an apple sound clip.
     /// </summary>
@@ -58,6 +64,12 @@ public class SoundManager : MonoBehaviour
 	private AudioSource PauseSource;
 
 	private AudioSource GameOverSpeechSource;
+
+	private AudioSource leftTickSource;
+
+	private AudioSource rightTickSource;
+
+	private AudioSource alertSource;
 
     // Use this for initialization
     void Awake()
@@ -86,6 +98,14 @@ public class SoundManager : MonoBehaviour
 		{
 			centerBeepSource = gameObject.AddAudio(CenterBeepClip, false, false, 1f);
 		}
+		if (LeftTickClip != null)
+		{
+			leftTickSource = gameObject.AddAudio(LeftTickClip, false, false, 1f);
+		}
+		if (RightTickClip != null)
+		{
+			rightTickSource = gameObject.AddAudio(RightTickClip, false, false, 1f);
+		}
 		if (MainMenuClip != null)
 		{
 			MainMenuSource = gameObject.AddAudio(MainMenuClip, false, false, 1f);
@@ -97,6 +117,10 @@ public class SoundManager : MonoBehaviour
 		if (GameOverSpeechClip != null)
 		{
 			GameOverSpeechSource = gameObject.AddAudio(GameOverSpeechClip, false, false, 1f);
+		}
+		if (AlertClip != null)
+		{ 
+			alertSource = gameObject.AddAudio(AlertClip, false, false, 1f);
 		}
     }
 
@@ -132,11 +156,27 @@ public class SoundManager : MonoBehaviour
 		}
 	}
 
+	public void PlayLeftTickSoundEffect()
+	{
+		if (leftTickSource != null)
+		{
+			leftTickSource.Play();
+		}
+	}
+
 	public void PlayRightBeepSoundEffect()
 	{
 		if (rightBeepSource != null)
 		{
 			rightBeepSource.Play();
+		}
+	}
+
+	public void PlayRightTickSoundEffect()
+	{
+		if (rightTickSource != null)
+		{
+			rightTickSource.Play();
 		}
 	}
 
@@ -193,6 +233,14 @@ public class SoundManager : MonoBehaviour
 		if (GameOverSpeechSource != null)
 		{
 			GameOverSpeechSource.Stop();
+		}
+	}
+
+	public void PlayAlert()
+	{
+		if (alertSource != null)
+		{
+			alertSource.Play();
 		}
 	}
 

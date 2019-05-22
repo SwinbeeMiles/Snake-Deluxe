@@ -6,6 +6,16 @@ using Utils;
 
 public class Game : MonoBehaviour
 {
+	private bool accessFlag = false;
+
+	public bool getAccessFlag
+	{
+		get
+		{
+			return accessFlag;
+		}
+	}
+
 	private int counter = 0;
     /// <summary>
     /// Variable used for game update delay calcuations.
@@ -82,6 +92,7 @@ public class Game : MonoBehaviour
     private int tempScore = 0;
     public int level = 0;
     public bool dead = false;
+
     /// <summary>
     /// Current score.
     /// </summary>
@@ -162,30 +173,35 @@ public class Game : MonoBehaviour
         {
             time -= GameSpeed;
             UpdateGameState();
-            if (Score >= 2 && level == 0 && dead == false)
-            {
-                tempScore = Score;
-                Time.timeScale = 0;
-                StopCoroutine(bonusCoroutine);
-                NextLevelMenu.gameObject.SetActive(true);
-            }
+			Time.timeScale = 0.20f; //0.25f
+			if (accessFlag == true)
+			{
+				Time.timeScale = 1;
+				if (Score >= 2 && level == 0 && dead == false)
+				{
+					tempScore = Score;
+					Time.timeScale = 0;
+					StopCoroutine(bonusCoroutine);
+					NextLevelMenu.gameObject.SetActive(true);
+				}
 
-            else if (Score >= 3 && level == 1 && dead == false)
-            {
-                tempScore = Score;
-                Time.timeScale = 0;
-                StopCoroutine(bonusCoroutine);
-                NextLevelMenu.gameObject.SetActive(true);
-            }
+				else if (Score >= 3 && level == 1 && dead == false)
+				{
+					tempScore = Score;
+					Time.timeScale = 0;
+					StopCoroutine(bonusCoroutine);
+					NextLevelMenu.gameObject.SetActive(true);
+				}
 
-            else if (Score >= 5 && level == 2 && dead == false)
-            {
-                StopCoroutine(bonusCoroutine);
-                tempScore = 0;
-                level = 0;
-                NextLevelMenu.gameObject.SetActive(false);
-                EndGameMenu.gameObject.SetActive(true);
-            }
+				else if (Score >= 5 && level == 2 && dead == false)
+				{
+					StopCoroutine(bonusCoroutine);
+					tempScore = 0;
+					level = 0;
+					NextLevelMenu.gameObject.SetActive(false);
+					EndGameMenu.gameObject.SetActive(true);
+				}
+			}
         }
     }
 
@@ -235,10 +251,14 @@ public class Game : MonoBehaviour
 
             if (snake.WithoutTail.Contains(head))
             {
-                // Snake has bitten its tail - game over
-                dead = true;
-                StartCoroutine(GameOverCoroutine());
-                return;
+				if (accessFlag == true)
+				{
+					// Snake has bitten its tail - game over
+					dead = true;
+					StartCoroutine(GameOverCoroutine());
+					return;
+				}
+                
             }
 
             if (x >= 0 && x < Board.Columns && y >= 0 && y < Board.Rows)
@@ -254,7 +274,7 @@ public class Game : MonoBehaviour
 				{
 					soundManager.PlayBonusSoundEffect();
 					snake.Move(dir, true);
-					Score += 10;
+					Score += 2;
 					StopCoroutine(bonusCoroutine);
 					PlantABonus();
 				}
@@ -266,59 +286,106 @@ public class Game : MonoBehaviour
 				else
 				{
 					snake.Move(dir, false);
-					//counter++;
-					//if (counter == 1) //Frequency of beeps
-					//{
-					//	if (((applePosition.y <= snake.Head.y && applePosition.x > snake.Head.x) || (applePosition.y >= snake.Head.y && applePosition.x > snake.Head.x)) && (lastdir == Vector2.up))
-					//	{
-					//		soundManager.PlayRightBeepSoundEffect();
-					//	}
-					//	else if (((applePosition.y <= snake.Head.y && applePosition.x < snake.Head.x) || (applePosition.y >= snake.Head.y && applePosition.x < snake.Head.x)) && (lastdir == Vector2.up))
-					//	{
-					//		soundManager.PlayLeftBeepSoundEffect();
-					//	}
-					//	else if ((applePosition.y <= snake.Head.y && applePosition.x == snake.Head.x) && (lastdir == Vector2.up))
-					//	{
-					//		soundManager.PlayCenterBeepSoundEffect();
-					//	}
-					//	else if (((applePosition.y > snake.Head.y && applePosition.x <= snake.Head.x) || (applePosition.y > snake.Head.y && applePosition.x >= snake.Head.x)) && (lastdir == Vector2.right))
-					//	{
-					//		soundManager.PlayRightBeepSoundEffect();
-					//	}
-					//	else if (((applePosition.y < snake.Head.y && applePosition.x <= snake.Head.x) || (applePosition.y < snake.Head.y && applePosition.x >= snake.Head.x)) && (lastdir == Vector2.right))
-					//	{
-					//		soundManager.PlayLeftBeepSoundEffect();
-					//	}
-					//	else if ((applePosition.y == snake.Head.y && applePosition.x >= snake.Head.x) && (lastdir == Vector2.right))
-					//	{
-					//		soundManager.PlayCenterBeepSoundEffect();
-					//	}
-					//	else if (((applePosition.y < snake.Head.y && applePosition.x >= snake.Head.x) || (applePosition.y < snake.Head.y && applePosition.x <= snake.Head.x)) && (lastdir == Vector2.left))
-					//	{
-					//		soundManager.PlayRightBeepSoundEffect();
-					//	}
-					//	else if (((applePosition.y > snake.Head.y && applePosition.x >= snake.Head.x) || (applePosition.y > snake.Head.y && applePosition.x <= snake.Head.x)) && (lastdir == Vector2.left))
-					//	{
-					//		soundManager.PlayLeftBeepSoundEffect();
-					//	}
-					//	else if ((applePosition.y == snake.Head.y && applePosition.x <= snake.Head.x) && (lastdir == Vector2.left))
-					//	{
-					//		soundManager.PlayCenterBeepSoundEffect();
-					//	}
-					//	else if (((applePosition.y >= snake.Head.y && applePosition.x > snake.Head.x) || (applePosition.y <= snake.Head.y && applePosition.x > snake.Head.x)) && (lastdir == Vector2.down))
-					//	{
-					//		soundManager.PlayRightBeepSoundEffect();
-					//	}
-					//	else if (((applePosition.y >= snake.Head.y && applePosition.x < snake.Head.x) || (applePosition.y <= snake.Head.y && applePosition.x < snake.Head.x)) && (lastdir == Vector2.down))
-					//	{
-					//		soundManager.PlayLeftBeepSoundEffect();
-					//	}
-					//	else if ((applePosition.y >= snake.Head.y && applePosition.x == snake.Head.x) && (lastdir == Vector2.down))
-					//	{
-					//		soundManager.PlayCenterBeepSoundEffect();
-					//	}
-					//	counter = 0;
-					//}
+					print("appleY" + applePosition.y);
+					print("appleX" + applePosition.x);
+					print("snakeY" + snake.Head.y);
+					print("snakeX" + snake.Head.x);
+					if (accessFlag == false)
+					{
+						counter++;
+						if (counter == 1) //Frequency of beeps
+						{
+							if (((applePosition.y < snake.Head.y && applePosition.x > snake.Head.x) || (applePosition.y > snake.Head.y && applePosition.x > snake.Head.x)) && (lastdir == Vector2.up))
+							{
+								soundManager.PlayRightBeepSoundEffect();
+							}
+							else if ((applePosition.y == snake.Head.y && applePosition.x > snake.Head.x) && (lastdir == Vector2.up))
+							{
+								soundManager.PlayRightTickSoundEffect();
+							}
+							else if (((applePosition.y < snake.Head.y && applePosition.x < snake.Head.x) || (applePosition.y > snake.Head.y && applePosition.x < snake.Head.x)) && (lastdir == Vector2.up))
+							{
+								soundManager.PlayLeftBeepSoundEffect();
+							}
+							else if ((applePosition.y == snake.Head.y && applePosition.x < snake.Head.x) && (lastdir == Vector2.up))
+							{
+								soundManager.PlayLeftTickSoundEffect();
+							}
+							else if ((applePosition.y <= snake.Head.y && applePosition.x == snake.Head.x) && (lastdir == Vector2.up))
+							{
+								soundManager.PlayCenterBeepSoundEffect();
+							}
+
+							else if (((applePosition.y > snake.Head.y && applePosition.x < snake.Head.x) || (applePosition.y > snake.Head.y && applePosition.x > snake.Head.x)) && (lastdir == Vector2.right))
+							{
+								soundManager.PlayRightBeepSoundEffect();
+							}
+							else if ((applePosition.y > snake.Head.y && applePosition.x == snake.Head.x) && (lastdir == Vector2.right))
+							{
+								soundManager.PlayRightTickSoundEffect();
+							}
+							else if (((applePosition.y < snake.Head.y && applePosition.x < snake.Head.x) || (applePosition.y < snake.Head.y && applePosition.x > snake.Head.x)) && (lastdir == Vector2.right))
+							{
+								soundManager.PlayLeftBeepSoundEffect();
+							}
+							else if ((applePosition.y < snake.Head.y && applePosition.x == snake.Head.x) && (lastdir == Vector2.right))
+							{
+								soundManager.PlayLeftTickSoundEffect();
+							}
+							else if ((applePosition.y == snake.Head.y && applePosition.x >= snake.Head.x) && (lastdir == Vector2.right))
+							{
+								soundManager.PlayCenterBeepSoundEffect();
+							}
+
+							else if (((applePosition.y < snake.Head.y && applePosition.x > snake.Head.x) || (applePosition.y < snake.Head.y && applePosition.x < snake.Head.x)) && (lastdir == Vector2.left))
+							{
+								soundManager.PlayRightBeepSoundEffect();
+							}
+							else if ((applePosition.y < snake.Head.y && applePosition.x == snake.Head.x) && (lastdir == Vector2.left))
+							{
+								soundManager.PlayRightTickSoundEffect();
+							}
+							else if (((applePosition.y > snake.Head.y && applePosition.x > snake.Head.x) || (applePosition.y > snake.Head.y && applePosition.x < snake.Head.x)) && (lastdir == Vector2.left))
+							{
+								soundManager.PlayLeftBeepSoundEffect();
+							}
+							else if ((applePosition.y > snake.Head.y && applePosition.x == snake.Head.x) && (lastdir == Vector2.left))
+							{
+								soundManager.PlayLeftTickSoundEffect();
+							}
+							else if ((applePosition.y == snake.Head.y && applePosition.x <= snake.Head.x) && (lastdir == Vector2.left))
+							{
+								soundManager.PlayCenterBeepSoundEffect();
+							}
+
+							else if (((applePosition.y > snake.Head.y && applePosition.x > snake.Head.x) || (applePosition.y < snake.Head.y && applePosition.x > snake.Head.x)) && (lastdir == Vector2.down))
+							{
+								soundManager.PlayRightBeepSoundEffect();
+							}
+							else if ((applePosition.y == snake.Head.y && applePosition.x > snake.Head.x) && (lastdir == Vector2.down))
+							{
+								soundManager.PlayRightTickSoundEffect();
+							}
+							else if (((applePosition.y > snake.Head.y && applePosition.x < snake.Head.x) || (applePosition.y < snake.Head.y && applePosition.x < snake.Head.x)) && (lastdir == Vector2.down))
+							{
+								soundManager.PlayLeftBeepSoundEffect();
+							}
+							else if ((applePosition.y == snake.Head.y && applePosition.x < snake.Head.x) && (lastdir == Vector2.down))
+							{
+								soundManager.PlayLeftTickSoundEffect();
+							}
+							else if ((applePosition.y >= snake.Head.y && applePosition.x == snake.Head.x) && (lastdir == Vector2.down))
+							{
+								soundManager.PlayCenterBeepSoundEffect();
+							}
+
+							if ((snake.Head.x >= 0 && snake.Head.x < 3) || (snake.Head.x > 26 && snake.Head.x < 30) || (snake.Head.y >= 0 && snake.Head.y < 3) || (snake.Head.y >= 17 && snake.Head.y < 20))
+							{
+								soundManager.PlayAlert();
+							}
+							counter = 0;
+						}
+					}
                 }
             }
 
@@ -363,7 +430,10 @@ public class Game : MonoBehaviour
         HideAllPanels();
         Restart();
         dead = false;
-        BuildMultipleWallOne();
+		if (accessFlag == true)
+		{
+			BuildMultipleWallOne();
+		}
         GamePanel.gameObject.SetActive(true);
     }
 
@@ -407,8 +477,11 @@ public class Game : MonoBehaviour
         // Plant an apple
         PlantAnApple();
 
-        // Start bonus coroutine
-        PlantABonus();
+		// Start bonus coroutine
+		if (accessFlag == true)
+		{
+        	PlantABonus();
+		}
 
 		Time.timeScale = 1;
 
@@ -510,8 +583,11 @@ public class Game : MonoBehaviour
         // Play game over sound effect
         soundManager.PlayGameOverSoundEffect();
 
-        // Stop bonus coroutine
-        StopCoroutine(bonusCoroutine);
+		// Stop bonus coroutine
+		if (accessFlag == true)
+		{
+			StopCoroutine(bonusCoroutine);
+		}
 
         // Pause the game
         Paused = true;
@@ -699,4 +775,16 @@ public class Game : MonoBehaviour
         LoadNextLevel();
         GamePanel.gameObject.SetActive(true);
     }
+
+	public void AccessToggle()
+	{
+		if (accessFlag == false)
+		{
+			accessFlag = true;
+		}
+		else
+		{
+			accessFlag = false;
+		}
+	}
 }
