@@ -32,6 +32,8 @@ public class SoundManager : MonoBehaviour
 
 	public AudioClip GameOverSpeechClip;
 
+	public AudioClip InstructionClip;
+
 	public AudioClip LeftTickClip;
 
 	public AudioClip RightTickClip;
@@ -64,6 +66,8 @@ public class SoundManager : MonoBehaviour
 	private AudioSource PauseSource;
 
 	private AudioSource GameOverSpeechSource;
+
+	private AudioSource InstructionSource;
 
 	private AudioSource leftTickSource;
 
@@ -117,6 +121,10 @@ public class SoundManager : MonoBehaviour
 		if (GameOverSpeechClip != null)
 		{
 			GameOverSpeechSource = gameObject.AddAudio(GameOverSpeechClip, false, false, 1f);
+		}
+		if (InstructionClip != null)
+		{
+			InstructionSource = gameObject.AddAudio(InstructionClip, false, false, 1f);
 		}
 		if (AlertClip != null)
 		{ 
@@ -233,6 +241,22 @@ public class SoundManager : MonoBehaviour
 		if (GameOverSpeechSource != null)
 		{
 			GameOverSpeechSource.Stop();
+		}
+	}
+
+	public void PlayInstruction()
+	{
+		if (InstructionSource != null)
+		{
+			InstructionSource.Play();
+		}
+	}
+
+	public void StopInstruction()
+	{
+		if (InstructionSource != null)
+		{
+			InstructionSource.Stop();
 		}
 	}
 

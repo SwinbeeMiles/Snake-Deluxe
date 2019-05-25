@@ -210,16 +210,30 @@ public class Game : MonoBehaviour
 		Paused = true;
 		PauseMenu.gameObject.SetActive(true);
 		Time.timeScale = 0;
-		soundManager.PlayPause();
+		if (accessFlag == false)
+		{
+			soundManager.PlayPause();
+		}
 	}
 
 	public void Unpause()
 	{
-		soundManager.StopPause();
+		if (accessFlag == false)
+		{
+			soundManager.StopPause();
+		}
 		Paused = false;
 		PauseMenu.gameObject.SetActive(false);
 		controller.Resume();
 		Time.timeScale = 1;
+	}
+
+	public void Instruction()
+	{
+		if (accessFlag == false)
+		{
+			soundManager.PlayInstruction();
+		}
 	}
 
 	public void QuitGame()
@@ -403,11 +417,17 @@ public class Game : MonoBehaviour
     /// </summary>
     public void ShowMenu()
     {
-		soundManager.StopGameOver();
-		soundManager.StopPause();
+		if (accessFlag == false)
+		{
+			soundManager.StopGameOver();
+			soundManager.StopPause();
+		}
         HideAllPanels();
         Menu.gameObject.SetActive(true);
-		soundManager.PlayMainMenu();
+		if (accessFlag == false)
+		{
+			soundManager.PlayMainMenu();
+		}
     }
 
     /// <summary>
@@ -415,11 +435,17 @@ public class Game : MonoBehaviour
     /// </summary>
     public void ShowGameOver()
     {
-		soundManager.StopMainMenu();
-		soundManager.StopPause();
+		if (accessFlag == false)
+		{
+			soundManager.StopMainMenu();
+			soundManager.StopPause();
+		}
         HideAllPanels();
         GameOver.gameObject.SetActive(true);
-		soundManager.PlayGameOver();
+		if (accessFlag == false)
+		{
+			soundManager.PlayGameOver();
+		}
     }
 
     /// <summary>
@@ -442,9 +468,13 @@ public class Game : MonoBehaviour
     /// </summary>
     private void HideAllPanels()
     {
-		soundManager.StopGameOver();
-		soundManager.StopPause();
-		soundManager.StopMainMenu();
+		if (accessFlag == false)
+		{
+			soundManager.StopGameOver();
+			soundManager.StopPause();
+			soundManager.StopMainMenu();
+			soundManager.StopInstruction();
+		}
         Menu.gameObject.SetActive(false);
         GamePanel.gameObject.SetActive(false);
         GameOver.gameObject.SetActive(false);
@@ -781,10 +811,12 @@ public class Game : MonoBehaviour
 		if (accessFlag == false)
 		{
 			accessFlag = true;
+			soundManager.StopMainMenu();
 		}
 		else
 		{
 			accessFlag = false;
+			soundManager.PlayMainMenu();
 		}
 	}
 }
