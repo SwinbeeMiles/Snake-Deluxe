@@ -254,12 +254,6 @@ public class Game : MonoBehaviour
 			// New head position
 			var head = snake.NextHeadPosition(dir);
 
-			if (dir == Vector2.zero)
-			{
-				head = snake.NextHeadPosition(lastdir);
-				Pause();
-			}
-
             var x = head.x;
             var y = head.y;
 

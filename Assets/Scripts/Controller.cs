@@ -39,12 +39,7 @@ public class Controller : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // Keyboard controls
-		if (Input.GetKeyDown(KeyCode.Escape))
-		{
-			Enqueue(Vector2.zero);
-		}
-        else if (Input.GetKeyDown("up") && LastDirection != Vector2.down)
+		if (Input.GetKeyDown("up") && LastDirection != Vector2.down)
         {
             Enqueue(Vector2.up);
         }
