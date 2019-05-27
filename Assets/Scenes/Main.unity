@@ -1713,7 +1713,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.31756946, g: 0.8773585, b: 0, a: 1}
+  m_Color: {r: 0.31756946, g: 0.8773585, b: 0, a: 0}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -2682,7 +2682,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 118.699875, y: 215.09718}
+  m_AnchoredPosition: {x: 172.95, y: 216.5}
   m_SizeDelta: {x: 223.51, y: 263.24}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1450505266
@@ -3025,10 +3025,11 @@ MonoBehaviour:
   NextLevelMenu: {fileID: 1611586392}
   EndGameMenu: {fileID: 2038166972}
   PauseMenu: {fileID: 449009361}
-  GameSpeed: 0.115
+  GameSpeed: 0.1155
   Board: {fileID: 516905211}
   _level: 0
   dead: 0
+  timeStart: 0
 --- !u!114 &1607903386
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3066,6 +3067,18 @@ MonoBehaviour:
   LeftTickClip: {fileID: 8300000, guid: 0aa81c137c4942344816606fcb6c5cbf, type: 3}
   RightTickClip: {fileID: 8300000, guid: e089ac2636e5a5b4f8e1fea38f04fb0f, type: 3}
   AlertClip: {fileID: 8300000, guid: 8248b8951eeb7b14ebb69ec3baf90630, type: 3}
+  ouch: {fileID: 8300000, guid: a3e95797bf38ab947b200c9c5d2354e2, type: 3}
+  zero: {fileID: 8300000, guid: ffaf656a57eaea647bfd40a40050f287, type: 3}
+  one: {fileID: 8300000, guid: 5ddbb66ddd318fb45b45b465ecd831d6, type: 3}
+  two: {fileID: 8300000, guid: 2aefb3213b16e3d40bc166a889a1f59a, type: 3}
+  three: {fileID: 8300000, guid: 2b6a438a9c0125e41ade5ffd6b2f8c0b, type: 3}
+  four: {fileID: 8300000, guid: ef47ebbc25c4f794f8e167bf546cad19, type: 3}
+  five: {fileID: 8300000, guid: ea3e590eeeb94d245aa997e016ba3f99, type: 3}
+  six: {fileID: 8300000, guid: a9d807d6ed2d57941a5af5269fb3a44b, type: 3}
+  seven: {fileID: 8300000, guid: 31c56a31cdfa42247a5ac4bcaee3a8d1, type: 3}
+  eight: {fileID: 8300000, guid: 0230c771a9ef8f7479a3783dbd27a47c, type: 3}
+  nine: {fileID: 8300000, guid: ace53e41fabed7847bb74c03ddfc4980, type: 3}
+  ten: {fileID: 8300000, guid: 41ca0eea5eeabbc44acbebb80f43a75a, type: 3}
 --- !u!114 &1607903388
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3090,6 +3103,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 19ee00840f5a7694ea6d16ccb64aa1a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  text: 
 --- !u!114 &1607903390
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3133,6 +3147,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 19ee00840f5a7694ea6d16ccb64aa1a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  text: 
 --- !u!114 &1611586393
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4631,7 +4646,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 82.65, y: 170.75}
+  m_AnchoredPosition: {x: 142.9, y: 170.75}
   m_SizeDelta: {x: 194.9, y: 110.2}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2064982698
