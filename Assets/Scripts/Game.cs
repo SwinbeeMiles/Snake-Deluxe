@@ -365,16 +365,7 @@ public class Game : MonoBehaviour
                         StartCoroutine(GameOverCoroutine());
                     }
                 }
-                else if (Board[head].Content == TileContent.Poison)
-                {
-                    snake.Remove(dir, true);
-                    Score -= 1;
-                    PlantAPoison();
-                    if (snake.isSmallestSize)
-                    {
-                        StartCoroutine(GameOverCoroutine());
-                    }
-                }
+
                 else if (head == bonusPosition && bonusActive)
 				{
 					soundManager.PlayBonusSoundEffect();
