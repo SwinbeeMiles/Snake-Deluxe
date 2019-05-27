@@ -16,6 +16,10 @@ public class Game : MonoBehaviour
 		}
 	}
 
+	private bool countDownFlag = false;
+
+	private int countDown;
+
 	private int counter = 0;
     /// <summary>
     /// Variable used for game update delay calcuations.
@@ -207,9 +211,20 @@ public class Game : MonoBehaviour
         time += Time.deltaTime;
         while (time > GameSpeed)
         {
+			print(countDown);
+			if (accessFlag == false && countDownFlag == true)
+			{
+				countDown -= 1;
+				if (countDown == 0)
+				{
+					StartCoroutine(GameOverCoroutine());
+					countDownFlag = false;
+				}
+			}
+
             time -= GameSpeed;
             UpdateGameState();
-			Time.timeScale = 0.20f; //0.25f
+			Time.timeScale = 0.30f; //0.25f
 			if (accessFlag == true)
 			{
 				Time.timeScale = 1;
@@ -261,7 +276,7 @@ public class Game : MonoBehaviour
                 }
             }
                 timeStart += 1;
-            print(timeStart);
+            //print(timeStart);
         }
     }
 
@@ -363,7 +378,7 @@ public class Game : MonoBehaviour
 				{
 					soundManager.PlayBonusSoundEffect();
 					snake.Move(dir, true);
-					Score += 2;
+					Score += 3;
 					StopCoroutine(bonusCoroutine);
 					PlantABonus();
 				}
@@ -376,10 +391,10 @@ public class Game : MonoBehaviour
 				else
 				{
 					snake.Move(dir, false);
-					print("appleY" + applePosition.y);
-					print("appleX" + applePosition.x);
-					print("snakeY" + snake.Head.y);
-					print("snakeX" + snake.Head.x);
+					//print("appleY" + applePosition.y);
+					//print("appleX" + applePosition.x);
+					//print("snakeY" + snake.Head.y);
+					//print("snakeX" + snake.Head.x);
 					if (accessFlag == false)
 					{
 						counter++;
@@ -560,6 +575,10 @@ public class Game : MonoBehaviour
     /// </summary>
     private void Restart()
     {
+		countDown = 158;
+
+		countDownFlag = true;
+
 		counter = 0;
         // Resets the controller.
         controller.Reset();
@@ -635,7 +654,7 @@ public class Game : MonoBehaviour
                 break;
             }
         }
-        print(applePosition);
+        //print(applePosition);
     }
     
     /// <summary>
@@ -650,7 +669,7 @@ public class Game : MonoBehaviour
         }
         poisonPosition = emptyPositions.RandomElement();
         Board[poisonPosition].Content = TileContent.Poison;
-        print(poisonPosition);
+        //print(poisonPosition);
     }
     
     /// <summary>
