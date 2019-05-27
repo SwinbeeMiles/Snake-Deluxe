@@ -16,6 +16,8 @@ public class Snake : IEnumerable<IntVector2>
     /// </summary>
     private HashSet<IntVector2> bulges;
 
+    private bool sizeFlag = false;
+
     /// <summary>
     /// Game board.
     /// </summary>
@@ -73,6 +75,15 @@ public class Snake : IEnumerable<IntVector2>
         }
     }
 
+    public bool isSmallestSize
+    {
+        get
+        {
+            return sizeFlag;
+        }
+
+    }
+
     /// <summary>
     /// Resets snake to original position.
     /// </summary>
@@ -120,6 +131,34 @@ public class Snake : IEnumerable<IntVector2>
         UpdateSnakeState();
     }
 
+    public void Remove(IntVector2 direction, bool extend)
+    {
+        var newHead = NextHeadPosition(direction);
+        body.AddLast(newHead);
+        board[body.First.Value].Content = TileContent.Empty;
+        body.RemoveFirst();
+        if (extend)
+        {
+            bulges.Add(newHead);
+        }
+        else
+        {
+            bulges.Remove(body.First.Value);
+            board[body.First.Value].Content = TileContent.Empty;
+            body.RemoveFirst();
+        }
+        if (board[body.First.Value].Content != TileContent.SnakesHead)
+        {
+            board[body.First.Value].Content = TileContent.Empty;
+            body.RemoveFirst();
+            sizeFlag = false;
+        }
+        else
+        {
+            sizeFlag = true;
+        }
+        UpdateSnakeState();
+    }
     /// <summary>
     /// Updates snake to display correctly
     /// </summary>

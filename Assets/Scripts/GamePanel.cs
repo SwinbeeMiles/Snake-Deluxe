@@ -9,11 +9,16 @@ public class GamePanel : MonoBehaviour {
     /// </summary>
     private Text textScore;
     /// <summary>
+    /// Text showing current score.
+    /// </summary>
+    private Text textCurrentLevel;
+    /// <summary>
     /// Text showing high score.
     /// </summary>
     //private Text textHighScore;
 
     private int _score;
+    private int _level;
     //private int _highScore;
 
     /// <summary>
@@ -33,6 +38,21 @@ public class GamePanel : MonoBehaviour {
     }
 
     /// <summary>
+    /// Gets or sets currently level.
+    /// </summary>
+    public int Level
+    {
+        get
+        {
+            return _level;
+        }
+        set
+        {
+            _level = value;
+            textCurrentLevel.text = value.ToString();
+        }
+    }
+    /// <summary>
     /// Gets or sets currently displayed high score.
     /// </summary>
     /*public int HighScore
@@ -51,6 +71,7 @@ public class GamePanel : MonoBehaviour {
     // Use this for initialization
     void Awake () {
         textScore = transform.Find("Score").GetComponent<Text>();
+        textCurrentLevel = transform.Find("Level").GetComponent<Text>();
         //textHighScore = transform.Find("High Score").GetComponent<Text>();
     }
 	
