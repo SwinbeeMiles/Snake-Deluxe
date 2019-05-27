@@ -18,7 +18,7 @@ public class NextLevelMenu : MonoBehaviour
         set
         {
             _level = value;
-            NextLevelText.text = text + (value+1).ToString();
+            NextLevelText.text = text + (value).ToString();
         }
     }
 
