@@ -43,6 +43,22 @@ public class Tile : MonoBehaviour
     /// </summary>
     public Sprite Wall;
     /// <summary>
+    /// Obstacles in map
+    /// </summary>
+    public Sprite Wall1;
+    /// <summary>
+    /// Obstacles in map
+    /// </summary>
+    public Sprite Wall2;
+    /// <summary>
+    /// Obstacles in map
+    /// </summary>
+    public Sprite Wall3;
+    /// <summary>
+    /// Obstacles in map
+    /// </summary>
+    public Sprite Poison;
+    /// <summary>
     /// List of sprites representing bonus fruit (10 points fruit).
     /// </summary>
     public List<Sprite> Bonuses;
@@ -116,6 +132,18 @@ public class Tile : MonoBehaviour
                     break;     
                 case TileContent.Wall:
                     image.sprite = Wall;
+                    break;
+                case TileContent.Wall1:
+                    image.sprite = Wall1;
+                    break;
+                case TileContent.Wall2:
+                    image.sprite = Wall2;
+                    break;
+                case TileContent.Wall3:
+                    image.sprite = Wall3;
+                    break;
+                case TileContent.Poison:
+                    image.sprite = Poison;
                     break;
             }
             lastUsedImage = image.sprite;

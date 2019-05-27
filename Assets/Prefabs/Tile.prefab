@@ -96,6 +96,10 @@ MonoBehaviour:
   SnakesL: {fileID: 21300000, guid: a42316dde9c8f0149a00a9f6209ca4a0, type: 3}
   SnakesLBulged: {fileID: 21300000, guid: 09bb96001e1143e4fb3872ae619c53fc, type: 3}
   Wall: {fileID: 21300000, guid: 27e8e46042ef9fc439cbfb41ab3ef9db, type: 3}
+  Wall1: {fileID: 21300000, guid: 9351fb20135b5cf4fa78dd8aea51c2ae, type: 3}
+  Wall2: {fileID: 21300000, guid: 6a4b18f170a5cc14eb9fe9c002085bfb, type: 3}
+  Wall3: {fileID: 21300000, guid: 5c8347b14a569d84b987171a4df2a945, type: 3}
+  Poison: {fileID: 21300000, guid: 30ba83a8f74febe4bb6e0a98f715e72a, type: 3}
   Bonuses:
   - {fileID: 21300000, guid: 8b5b343f3a838664298ad3e4ab5fae3e, type: 3}
   - {fileID: 21300000, guid: b8906f2f4a9a5794abdd7fd3a20c116f, type: 3}
