@@ -213,41 +213,41 @@ public class Game : MonoBehaviour
 			if (accessFlag == true)
 			{
 				Time.timeScale = 1;
-                if (Score >= 1 && Level == 1 && dead == false)
+                if (Score >= 5 && Level == 1 && dead == false)
 				{
                     setNextLevel(2);
 				}
 
-				else if (Score >= 1 && Level == 2 && dead == false)
+				else if (Score >= 5 && Level == 2 && dead == false)
 				{
                     setNextLevel(3);
 				}
 
-				else if (Score >= 1 && Level == 3 && dead == false)
+				else if (Score >= 5 && Level == 3 && dead == false)
 				{
                     setNextLevel(4);
                 }
-                else if (Score >= 1 && Level == 4 && dead == false)
+                else if (Score >= 5 && Level == 4 && dead == false)
                 {
                     setNextLevel(5);
                 }
-                else if (Score >= 1 && Level == 5 && dead == false)
+                else if (Score >= 5 && Level == 5 && dead == false)
                 {
                     setNextLevel(6);
                 }
-                else if (Score >= 1 && Level == 6 && dead == false)
+                else if (Score >= 5 && Level == 6 && dead == false)
                 {
                     setNextLevel(7);
                 }
-                else if (Score >= 1 && Level == 7 && dead == false)
+                else if (Score >= 5 && Level == 7 && dead == false)
                 {
                     setNextLevel(8);
                 }
-                else if (Score >= 1 && Level == 8 && dead == false)
+                else if (Score >= 5 && Level == 8 && dead == false)
                 {
                     setNextLevel(9);
                 }
-                else if (Score >= 1 && Level == 9 && dead == false)
+                else if (Score >= 5 && Level == 9 && dead == false)
                 {
                     StopCoroutine(bonusCoroutine);
                     tempScore = 0;
@@ -255,7 +255,7 @@ public class Game : MonoBehaviour
                     NextLevelMenu.gameObject.SetActive(false);
                     EndGameMenu.gameObject.SetActive(true);
                 }
-                else if (timeStart % 10 == 0)
+                else if (timeStart % 25 == 0)
                 {
                     PlantAPoison();
                 }
@@ -1304,49 +1304,49 @@ public class Game : MonoBehaviour
         snake.Reset();
 
         //Level 2
-        if (tempScore >= 1 && Level == 2)
+        if (tempScore >= 5 && Level == 2)
         {
             tempScore = 0;
             BuildMultipleWallTwo(TileContent.Wall1);
         }
         //Level 3
-        else if (tempScore >= 1 && Level == 3)
+        else if (tempScore >= 5 && Level == 3)
         {
             tempScore = 0;
             BuildMultipleWallThree(TileContent.Wall1);
         }
         //Level 4
-        else if (tempScore >= 1 && Level == 4)
+        else if (tempScore >= 5 && Level == 4)
         {
             tempScore = 0;
             BuildMultipleWallFour(TileContent.Wall2);
         }
         //Level 5
-        else if (tempScore >= 1 && Level == 5)
+        else if (tempScore >= 5 && Level == 5)
         {
             tempScore = 0;
             BuildMultipleWallFive(TileContent.Wall2);
         }
         //Level 6
-        else if (tempScore >= 1 && Level == 6)
+        else if (tempScore >= 5 && Level == 6)
         {
             tempScore = 0;
             BuildMultipleWallSix(TileContent.Wall2);
         }
         //Level 7
-        else if (tempScore >= 1 && Level == 7)
+        else if (tempScore >= 5 && Level == 7)
         {
             tempScore = 0;
             BuildMultipleWallSeven(TileContent.Wall3);
         }
         //Level 8
-        else if (tempScore >= 1 && Level == 8)
+        else if (tempScore >= 5 && Level == 8)
         {
             tempScore = 0;
             BuildMultipleWallEight(TileContent.Wall3);
         }
         //Level 9
-        else if (tempScore >= 1 && Level == 9)
+        else if (tempScore >= 5 && Level == 9)
         {
             tempScore = 0;
             BuildMultipleWallNine(TileContent.Wall3);
