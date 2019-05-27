@@ -211,7 +211,7 @@ public class Game : MonoBehaviour
         time += Time.deltaTime;
         while (time > GameSpeed)
         {
-			print(countDown);
+			//print(countDown);
 			if (accessFlag == false && countDownFlag == true)
 			{
 				countDown -= 1;
@@ -356,6 +356,7 @@ public class Game : MonoBehaviour
 
                 else if (Board[head].Content == TileContent.Poison)
                 {
+					soundManager.Playouch();
                     snake.Remove(dir, true);
                     Score -= 1;
                     PlantAPoison();
@@ -535,7 +536,43 @@ public class Game : MonoBehaviour
         GameOver.gameObject.SetActive(true);
 		if (accessFlag == false)
 		{
-			soundManager.PlayGameOver();
+			//soundManager.PlayGameOver();
+			switch (_score)
+			{
+				case 0:
+					soundManager.Playzero();
+					break;
+				case 1:
+					soundManager.Playone();
+					break;
+				case 2:
+					soundManager.Playtwo();
+					break;
+				case 3:
+					soundManager.Playthree();
+					break;
+				case 4:
+					soundManager.Playfour();
+					break;
+				case 5:
+					soundManager.Playfive();
+					break;
+				case 6:
+					soundManager.Playsix();
+					break;
+				case 7:
+					soundManager.Playseven();
+					break;
+				case 8:
+					soundManager.Playeight();
+					break;
+				case 9:
+					soundManager.Playnine();
+					break;
+				case 10:
+					soundManager.Playten();
+					break;
+			}
 		}
     }
 
@@ -718,7 +755,8 @@ public class Game : MonoBehaviour
     /// <returns></returns>
     private IEnumerator GameOverCoroutine()
     {
-        // Play game over sound effect
+		// Play game over sound effect
+
         soundManager.PlayGameOverSoundEffect();
 
 		// Stop bonus coroutine
@@ -741,8 +779,13 @@ public class Game : MonoBehaviour
 
         // Show "game over" panel
         ShowGameOver();
+
+
+
         Level = 0;
         dead = true;
+
+
     }
 
     private void BuildAWall(int x, int y, TileContent wallType)

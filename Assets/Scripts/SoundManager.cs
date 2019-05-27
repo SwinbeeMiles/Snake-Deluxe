@@ -40,6 +40,20 @@ public class SoundManager : MonoBehaviour
 
 	public AudioClip AlertClip;
 
+	public AudioClip ouch;
+
+	public AudioClip zero;
+	public AudioClip one;
+	public AudioClip two;
+	public AudioClip three;
+	public AudioClip four;
+	public AudioClip five;
+	public AudioClip six;
+	public AudioClip seven;
+	public AudioClip eight;
+	public AudioClip nine;
+	public AudioClip ten;
+
     /// <summary>
     /// Audio source for an apple sound clip.
     /// </summary>
@@ -74,6 +88,20 @@ public class SoundManager : MonoBehaviour
 	private AudioSource rightTickSource;
 
 	private AudioSource alertSource;
+
+	private AudioSource ouchsrc;
+
+	private AudioSource zerosrc;
+	private AudioSource onesrc;
+	private AudioSource twosrc;
+	private AudioSource threesrc;
+	private AudioSource foursrc;
+	private AudioSource fivesrc;
+	private AudioSource sixsrc;
+	private AudioSource sevensrc;
+	private AudioSource eightsrc;
+	private AudioSource ninesrc;
+	private AudioSource tensrc;
 
     // Use this for initialization
     void Awake()
@@ -130,6 +158,55 @@ public class SoundManager : MonoBehaviour
 		{ 
 			alertSource = gameObject.AddAudio(AlertClip, false, false, 1f);
 		}
+		if (zero != null)
+		{
+			zerosrc = gameObject.AddAudio(zero, false, false, 1f);
+		}
+		if (one != null)
+		{
+			onesrc = gameObject.AddAudio(one, false, false, 1f);
+		}
+		if (two != null)
+		{
+			twosrc = gameObject.AddAudio(two, false, false, 1f);
+		}
+		if (three != null)
+		{
+			threesrc = gameObject.AddAudio(three, false, false, 1f);
+		}
+		if (four != null)
+		{
+			foursrc = gameObject.AddAudio(four, false, false, 1f);
+		}
+		if (five != null)
+		{
+			fivesrc = gameObject.AddAudio(five, false, false, 1f);
+		}
+		if (six != null)
+		{
+			sixsrc = gameObject.AddAudio(six, false, false, 1f);
+		}
+		if (seven != null)
+		{
+			sevensrc = gameObject.AddAudio(seven, false, false, 1f);
+		}
+		if (eight != null)
+		{
+			eightsrc = gameObject.AddAudio(eight, false, false, 1f);
+		}
+		if (nine != null)
+		{
+			ninesrc = gameObject.AddAudio(nine, false, false, 1f);
+		}
+		if (ten != null)
+		{
+			tensrc = gameObject.AddAudio(ten, false, false, 1f);
+		}
+		if (ouch != null)
+		{
+			ouchsrc = gameObject.AddAudio(ouch, false, false, 1f);
+		}
+
     }
 
     public void PlayAppleSoundEffect()
@@ -265,6 +342,102 @@ public class SoundManager : MonoBehaviour
 		if (alertSource != null)
 		{
 			alertSource.Play();
+		}
+	}
+
+	public void Playzero()
+	{
+		if (zerosrc != null)
+		{
+			zerosrc.Play();
+		}
+	}
+
+	public void Playone()
+	{
+		if (onesrc != null)
+		{
+			onesrc.Play();
+		}
+	}
+
+	public void Playtwo()
+	{
+		if (twosrc != null)
+		{
+			twosrc.Play();
+		}
+	}
+
+	public void Playthree()
+	{
+		if (threesrc != null)
+		{
+			threesrc.Play();
+		}
+	}
+
+	public void Playfour()
+	{
+		if (foursrc != null)
+		{
+			foursrc.Play();
+		}
+	}
+
+	public void Playfive()
+	{
+		if (fivesrc != null)
+		{
+			fivesrc.Play();
+		}
+	}
+
+	public void Playsix()
+	{
+		if (sixsrc != null)
+		{
+			sixsrc.Play();
+		}
+	}
+
+	public void Playseven()
+	{
+		if (sevensrc != null)
+		{
+			sevensrc.Play();
+		}
+	}
+
+	public void Playeight()
+	{
+		if (eightsrc != null)
+		{
+			eightsrc.Play();
+		}
+	}
+
+	public void Playnine()
+	{
+		if (ninesrc != null)
+		{
+			ninesrc.Play();
+		}
+	}
+
+	public void Playten()
+	{
+		if (tensrc != null)
+		{
+			tensrc.Play();
+		}
+	}
+
+	public void Playouch()
+	{
+		if (ouchsrc != null)
+		{
+			ouchsrc.Play();
 		}
 	}
 
