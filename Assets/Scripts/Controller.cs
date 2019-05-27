@@ -30,6 +30,14 @@ public class Controller : MonoBehaviour
         }
     }
 
+	public IntVector2 GetDirection
+	{
+		get
+		{
+			return queue.First.Value;
+		}
+	}
+
     // Use this for initialization
     void Start()
     {
@@ -61,7 +69,7 @@ public class Controller : MonoBehaviour
     /// Enqueues next direction change command.
     /// </summary>
     /// <param name="up"></param>
-    private void Enqueue(IntVector2 direction)
+    public void Enqueue(IntVector2 direction)
     {
 		if (direction == Vector2.zero)
 		{
