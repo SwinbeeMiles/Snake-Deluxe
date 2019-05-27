@@ -42,6 +42,8 @@ public class SoundManager : MonoBehaviour
 
 	public AudioClip ouch;
 
+	public AudioClip WinClip;
+
 	public AudioClip zero;
 	public AudioClip one;
 	public AudioClip two;
@@ -90,6 +92,8 @@ public class SoundManager : MonoBehaviour
 	private AudioSource alertSource;
 
 	private AudioSource ouchsrc;
+
+	private AudioSource WinSource;
 
 	private AudioSource zerosrc;
 	private AudioSource onesrc;
@@ -206,7 +210,10 @@ public class SoundManager : MonoBehaviour
 		{
 			ouchsrc = gameObject.AddAudio(ouch, false, false, 1f);
 		}
-
+		if (WinClip != null)
+		{
+			WinSource = gameObject.AddAudio(WinClip, false, false, 1f);
+		}
     }
 
     public void PlayAppleSoundEffect()
@@ -438,6 +445,14 @@ public class SoundManager : MonoBehaviour
 		if (ouchsrc != null)
 		{
 			ouchsrc.Play();
+		}
+	}
+
+	public void PlayWinSoundEffect()
+	{
+		if (WinSource != null)
+		{
+			WinSource.Play();
 		}
 	}
 

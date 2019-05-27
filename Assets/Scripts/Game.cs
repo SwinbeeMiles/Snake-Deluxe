@@ -1,12 +1,11 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using Utils;
 
 public class Game : MonoBehaviour
 {
-	private bool accessFlag = false;
+	private bool accessFlag;
 
 	public bool getAccessFlag
 	{
@@ -16,11 +15,11 @@ public class Game : MonoBehaviour
 		}
 	}
 
-	private bool countDownFlag = false;
+	private bool countDownFlag;
 
 	private int countDown;
 
-	private int counter = 0;
+	private int counter;
     /// <summary>
     /// Variable used for game update delay calcuations.
     /// </summary>
@@ -100,13 +99,13 @@ public class Game : MonoBehaviour
 
     private int _highScore;
 
-    private int tempScore = 0;
+    private int tempScore;
 
-    public int _level = 0;
+    public int _level;
 
-    public bool dead = false;
+    public bool dead;
 
-    public float timeStart = 0;
+    public float timeStart;
     /// <summary>
     /// Current score.
     /// </summary>
@@ -231,39 +230,48 @@ public class Game : MonoBehaviour
                 if (Score >= 5 && Level == 1 && dead == false)
 				{
                     setNextLevel(2);
+					soundManager.PlayWinSoundEffect();
 				}
 
-				else if (Score >= 5 && Level == 2 && dead == false)
+				else if (Score >= 10 && Level == 2 && dead == false)
 				{
                     setNextLevel(3);
+					soundManager.PlayWinSoundEffect();
 				}
 
-				else if (Score >= 5 && Level == 3 && dead == false)
+				else if (Score >= 15 && Level == 3 && dead == false)
 				{
                     setNextLevel(4);
+					soundManager.PlayWinSoundEffect();
                 }
-                else if (Score >= 5 && Level == 4 && dead == false)
+                else if (Score >= 20 && Level == 4 && dead == false)
                 {
                     setNextLevel(5);
+					soundManager.PlayWinSoundEffect();
                 }
-                else if (Score >= 5 && Level == 5 && dead == false)
+                else if (Score >= 25 && Level == 5 && dead == false)
                 {
                     setNextLevel(6);
+					soundManager.PlayWinSoundEffect();
                 }
-                else if (Score >= 5 && Level == 6 && dead == false)
+                else if (Score >= 30 && Level == 6 && dead == false)
                 {
                     setNextLevel(7);
+					soundManager.PlayWinSoundEffect();
                 }
-                else if (Score >= 5 && Level == 7 && dead == false)
+                else if (Score >= 35 && Level == 7 && dead == false)
                 {
                     setNextLevel(8);
+					soundManager.PlayWinSoundEffect();
                 }
-                else if (Score >= 5 && Level == 8 && dead == false)
+                else if (Score >= 40 && Level == 8 && dead == false)
                 {
                     setNextLevel(9);
+					soundManager.PlayWinSoundEffect();
                 }
-                else if (Score >= 5 && Level == 9 && dead == false)
+                else if (Score >= 45 && Level == 9 && dead == false)
                 {
+					soundManager.PlayWinSoundEffect();
                     StopCoroutine(bonusCoroutine);
                     tempScore = 0;
                     Level = 0;
@@ -1345,7 +1353,7 @@ public class Game : MonoBehaviour
         controller.Reset();
 
         // Set score
-        Score = 0;
+        //Score = 0;
 
         // Disable bonus
         bonusActive = false;
