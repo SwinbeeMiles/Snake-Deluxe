@@ -199,7 +199,7 @@ public class Game : MonoBehaviour
 			if (accessFlag == true)
 			{
 				Time.timeScale = 1;
-				if (Score >= 2 && Level == 0 && dead == false)
+				if (Score >= 1 && Level == 0 && dead == false)
 				{
                     Level = 0;
 					tempScore = Score;
@@ -208,7 +208,7 @@ public class Game : MonoBehaviour
 					NextLevelMenu.gameObject.SetActive(true);
 				}
 
-				else if (Score >= 3 && Level == 1 && dead == false)
+				else if (Score >= 1 && Level == 1 && dead == false)
 				{
 					tempScore = Score;
 					Time.timeScale = 0;
@@ -216,15 +216,57 @@ public class Game : MonoBehaviour
 					NextLevelMenu.gameObject.SetActive(true);
 				}
 
-				else if (Score >= 5 && Level == 2 && dead == false)
+				else if (Score >= 1 && Level == 2 && dead == false)
 				{
-					StopCoroutine(bonusCoroutine);
-					tempScore = 0;
-					Level = 0;
-					NextLevelMenu.gameObject.SetActive(false);
-					EndGameMenu.gameObject.SetActive(true);
-				}
-			}
+                    tempScore = Score;
+                    Time.timeScale = 0;
+                    StopCoroutine(bonusCoroutine);
+                    NextLevelMenu.gameObject.SetActive(true);
+                }
+                else if (Score >= 1 && Level == 3 && dead == false)
+                {
+                    tempScore = Score;
+                    Time.timeScale = 0;
+                    StopCoroutine(bonusCoroutine);
+                    NextLevelMenu.gameObject.SetActive(true);
+                }
+                else if (Score >= 1 && Level == 4 && dead == false)
+                {
+                    tempScore = Score;
+                    Time.timeScale = 0;
+                    StopCoroutine(bonusCoroutine);
+                    NextLevelMenu.gameObject.SetActive(true);
+                }
+                else if (Score >= 1 && Level == 5 && dead == false)
+                {
+                    tempScore = Score;
+                    Time.timeScale = 0;
+                    StopCoroutine(bonusCoroutine);
+                    NextLevelMenu.gameObject.SetActive(true);
+                }
+                else if (Score >= 1 && Level == 6 && dead == false)
+                {
+                    tempScore = Score;
+                    Time.timeScale = 0;
+                    StopCoroutine(bonusCoroutine);
+                    NextLevelMenu.gameObject.SetActive(true);
+                }
+                else if (Score >= 1 && Level == 7 && dead == false)
+                {
+                    tempScore = Score;
+                    Time.timeScale = 0;
+                    StopCoroutine(bonusCoroutine);
+                    NextLevelMenu.gameObject.SetActive(true);
+                }
+                else if (Score >= 1 && Level == 8 && dead == false)
+                {
+                    StopCoroutine(bonusCoroutine);
+                    tempScore = 0;
+                    Level = 0;
+                    NextLevelMenu.gameObject.SetActive(false);
+                    EndGameMenu.gameObject.SetActive(true);
+                }
+            }
         }
     }
 
@@ -542,10 +584,10 @@ public class Game : MonoBehaviour
         // Start bonus coroutine
         if (accessFlag == true)
         {
+            BuildMultipleWallOne(TileContent.Wall);
             PlantABonus();
             for (int x = 0; x < 10; x++)
-            {
-                BuildMultipleWallSix(TileContent.Wall3);
+            {      
                 PlantAPoison();
             }
         }
@@ -1104,6 +1146,150 @@ public class Game : MonoBehaviour
             BuildAWall(x, 11, wallTextureType);
         }
     }
+
+    private void BuildMultipleWallSeven(TileContent wallTextureType)
+    {
+        for (int x=0; x<5; x++)
+        {
+            BuildAWall(x, 3, wallTextureType);
+            BuildAWall(x, 12, wallTextureType);
+        }
+
+        for (int x=25; x<30; x++)
+        {
+            BuildAWall(x, 3, wallTextureType);
+            BuildAWall(x, 12, wallTextureType);
+        }
+
+        for (int y=6; y<11; y++)
+        {
+            BuildAWall(2, y, wallTextureType);
+            BuildAWall(28, y, wallTextureType);
+            BuildAWall(12, y, wallTextureType);
+            BuildAWall(17, y, wallTextureType);
+        }
+
+        for (int x=10; x<14; x++)
+        {
+            BuildAWall(x, 3, wallTextureType);
+            BuildAWall(x, 12, wallTextureType);
+        }
+
+        for (int x=16; x<20; x++)
+        {
+            BuildAWall(x, 3, wallTextureType);
+            BuildAWall(x, 12, wallTextureType);
+        }
+
+        for (int x=3; x<7; x++)
+        {
+            BuildAWall(x, 14, wallTextureType);
+            BuildAWall(x, 16, wallTextureType);
+            BuildAWall(x, 18, wallTextureType);
+        }
+
+        for (int x = 23; x<27; x++)
+        {
+            BuildAWall(x, 14, wallTextureType);
+            BuildAWall(x, 16, wallTextureType);
+            BuildAWall(x, 18, wallTextureType);
+        }
+
+        for (int x = 10; x<14; x++)
+        {
+            BuildAWall(x, 14, wallTextureType);
+            BuildAWall(x, 16, wallTextureType);
+            BuildAWall(x, 18, wallTextureType);
+        }
+
+        for (int x = 16; x<20; x++)
+        {
+            BuildAWall(x, 14, wallTextureType);
+            BuildAWall(x, 16, wallTextureType);
+            BuildAWall(x, 18, wallTextureType);
+        }
+    }
+
+    private void BuildMultipleWallEight(TileContent wallTextureType)
+    {
+        BuildAWall(0, 0, wallTextureType);
+        BuildAWall(1, 1, wallTextureType);
+        BuildAWall(2, 2, wallTextureType);
+        BuildAWall(8, 8, wallTextureType);
+        BuildAWall(9, 9, wallTextureType);
+        BuildAWall(10, 10, wallTextureType);
+        BuildAWall(11, 11, wallTextureType);
+        BuildAWall(12, 12, wallTextureType);
+        BuildAWall(18, 18, wallTextureType);
+        BuildAWall(19, 19, wallTextureType);
+
+        BuildAWall(29, 0, wallTextureType);
+        BuildAWall(28, 1, wallTextureType);
+        BuildAWall(27, 2, wallTextureType);
+        BuildAWall(22, 8, wallTextureType);
+        BuildAWall(21, 9, wallTextureType);
+        BuildAWall(20, 10, wallTextureType);
+        BuildAWall(19, 11, wallTextureType);
+        BuildAWall(18, 12, wallTextureType);
+        BuildAWall(12, 18, wallTextureType);
+        BuildAWall(11, 19, wallTextureType);
+
+        for (int y = 0; y<7; y++)
+        {
+            BuildAWall(15, y, wallTextureType);
+        }
+
+        for (int y = 13; y < 20; y++)
+        {
+            BuildAWall(15, y, wallTextureType);
+        }
+
+        BuildAWall(0, 16, wallTextureType);
+        BuildAWall(2, 16, wallTextureType);
+        BuildAWall(4, 16, wallTextureType);
+        BuildAWall(6, 16, wallTextureType);
+
+        BuildAWall(28, 16, wallTextureType);
+        BuildAWall(26, 16, wallTextureType);
+        BuildAWall(24, 16, wallTextureType);
+        BuildAWall(22, 16, wallTextureType);
+
+        for (int y=0; y<6; y++)
+        {
+            BuildAWall(8, y, wallTextureType);
+            BuildAWall(22, y, wallTextureType);
+        }
+    }
+
+    private void BuildMultipleWallNine(TileContent wallTextureType)
+    {
+        for(int y=0; y<6; y++)
+        {
+            BuildAWall(28, y, wallTextureType);
+            BuildAWall(25, y, wallTextureType);
+            BuildAWall(22, y, wallTextureType);
+            BuildAWall(19, y, wallTextureType);
+            BuildAWall(16, y, wallTextureType);
+            BuildAWall(13, y, wallTextureType);
+        }
+
+        for (int y = 9; y < 15; y++)
+        {
+            BuildAWall(28, y, wallTextureType);
+            BuildAWall(25, y, wallTextureType);
+            BuildAWall(22, y, wallTextureType);
+            BuildAWall(19, y, wallTextureType);
+            BuildAWall(16, y, wallTextureType);
+            BuildAWall(13, y, wallTextureType);
+        }
+
+        for (int x = 0; x < 29; x+=2)
+        {
+            BuildAWall(x, 16, wallTextureType);
+            BuildAWall(x, 18, wallTextureType);
+        }
+
+    }
     private void LoadNextLevel()
     {
 
@@ -1122,25 +1308,63 @@ public class Game : MonoBehaviour
         // Resets snake
         snake.Reset();
 
-        //Second level
-        if (tempScore >= 2 && Level == 0)
+        //Level 1
+        if (tempScore >= 1 && Level == 0)
         {
             Level = 1;
             tempScore = 0;
-            BuildMultipleWallTwo(TileContent.Wall);
+            BuildMultipleWallTwo(TileContent.Wall1);
         }
-
-        //Last level
-        else if (tempScore >= 3 && Level == 1)
+        //Level 2
+        else if (tempScore >= 1 && Level == 1)
         {
             Level = 2;
             tempScore = 0;
             BuildMultipleWallThree(TileContent.Wall1);
         }
+        else if (tempScore >= 1 && Level == 2)
+        {
+            Level = 3;
+            tempScore = 0;
+            BuildMultipleWallFour(TileContent.Wall2);
+        }
+        else if (tempScore >= 1 && Level == 3)
+        {
+            Level = 4;
+            tempScore = 0;
+            BuildMultipleWallFive(TileContent.Wall2);
+        }
+        else if (tempScore >= 1 && Level == 4)
+        {
+            Level = 5;
+            tempScore = 0;
+            BuildMultipleWallSix(TileContent.Wall2);
+        }
+        else if (tempScore >= 1 && Level == 5)
+        {
+            Level = 6;
+            tempScore = 0;
+            BuildMultipleWallSeven(TileContent.Wall3);
+        }
+        else if (tempScore >= 1 && Level == 6)
+        {
+            Level = 7;
+            tempScore = 0;
+            BuildMultipleWallEight(TileContent.Wall3);
+        }
+        else if (tempScore >= 1 && Level == 7)
+        {
+            Level = 8;
+            tempScore = 0;
+            BuildMultipleWallNine(TileContent.Wall3);
+        }
 
         // Plant an apple
         PlantAnApple();
-
+        for (int x = 0; x < 10; x++)
+        {
+            PlantAPoison();
+        }
         // Start bonus coroutine
         PlantABonus();
 
