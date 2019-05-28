@@ -200,6 +200,7 @@ public class Game : MonoBehaviour
         tempScore = Score;
         Time.timeScale = 0;
         StopCoroutine(bonusCoroutine);
+		HideAllPanels();
         NextLevelMenu.gameObject.SetActive(true);
         Level = nextLevel;
     }
