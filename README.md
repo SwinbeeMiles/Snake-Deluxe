@@ -13,6 +13,10 @@ Original Game : https://github.com/dzduniak/Snake-Unity
 
 ✔ Non-accessibility mode contains poison, eating too much will reduce your snake length and kill you if you reach the minimum length
 
+# Launching Options
+1. Snake-Deluxe -> WINDOWS -> Snake.exe
+2. Build and Run with Unity
+
 # Game instructions
 - Arrow keys to change the direction of the snake
 - Esc to pause anytime while playing the game
