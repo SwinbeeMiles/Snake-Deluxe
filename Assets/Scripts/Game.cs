@@ -99,9 +99,9 @@ public class Game : MonoBehaviour
 
     private int _highScore;
 
-    private int tempScore;
+    private int _tempScore;
 
-    public int _level;
+    public int _level=1;
 
     public bool dead;
 
@@ -127,6 +127,18 @@ public class Game : MonoBehaviour
             }
         }
     }
+
+	public int tempScore
+	{
+		get
+		{
+			return _tempScore;
+		}
+		set
+		{
+			_tempScore = value;
+		}
+	}
 
     /// <summary>
     /// Current level.
