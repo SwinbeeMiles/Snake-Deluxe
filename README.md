@@ -3,9 +3,11 @@ Android Snake game made by dzduniak developed into Snake Deluxe by Team Delta.
 
 Original Game : https://github.com/dzduniak/Snake-Unity
 
-✔ Playable by blind or visually impaired user
+✔ Can be played by blind or visually impaired user
 
 ✔ Voiced interface and keyboard navigation for accessibility mode
+
+✔ Can be played without using a mouse, keyboard navigation is also support in non-accessibility mode
 
 ✔ Has another gamemode for normal user to play
 
@@ -14,8 +16,8 @@ Original Game : https://github.com/dzduniak/Snake-Unity
 ✔ Non-accessibility mode contains poison, eating too much will reduce your snake length and kill you if you reach the minimum length
 
 # Launching Options
-1. Snake-Deluxe -> WINDOWS -> Snake.exe
-2. Build and Run with Unity
+- Snake-Deluxe -> WINDOWS -> Snake.exe
+- Build and Run with Unity
 
 # Game instructions
 - Arrow keys to change the direction of the snake
